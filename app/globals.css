@@ -68,104 +68,117 @@ body {
   transition-delay: 0.8s;
 }
 
-/* ===== Hero Section ===== */
-.hero-gradient {
-  background: linear-gradient(
-    -45deg,
-    #c0c0c0,
-    #a8d8ea,
-    #ffffff,
-    #8a8a8a,
-    #c0c0c0,
-    #a8d8ea
-  );
-  background-size: 400% 400%;
-  animation: fluidGradient 15s ease infinite;
-}
-
-@keyframes fluidGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 50% 0%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  75% {
-    background-position: 50% 100%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Hero Bubbles */
-.hero-bubble {
-  position: absolute;
-  border-radius: 50%;
+/* ===== Hero Section (Water Surface) ===== */
+.hero-water-bg {
   background: radial-gradient(
-    circle at 30% 30%,
-    rgba(255, 255, 255, 0.4),
-    rgba(168, 216, 234, 0.1)
+    ellipse at 50% 55%,
+    #bccede 0%,
+    #a8bccf 25%,
+    #8ea4b8 55%,
+    #7a90a6 100%
   );
+}
+
+/* Static concentric rings for water surface texture */
+.hero-water-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 55%, transparent 18%, rgba(255, 255, 255, 0.06) 18.3%, transparent 18.6%),
+    radial-gradient(ellipse at 50% 55%, transparent 26%, rgba(255, 255, 255, 0.05) 26.3%, transparent 26.6%),
+    radial-gradient(ellipse at 50% 55%, transparent 34%, rgba(255, 255, 255, 0.04) 34.3%, transparent 34.6%),
+    radial-gradient(ellipse at 50% 55%, transparent 42%, rgba(255, 255, 255, 0.04) 42.3%, transparent 42.6%),
+    radial-gradient(ellipse at 50% 55%, transparent 50%, rgba(255, 255, 255, 0.03) 50.3%, transparent 50.6%),
+    radial-gradient(ellipse at 50% 55%, transparent 58%, rgba(255, 255, 255, 0.03) 58.3%, transparent 58.6%),
+    radial-gradient(ellipse at 50% 55%, transparent 66%, rgba(255, 255, 255, 0.02) 66.3%, transparent 66.6%),
+    radial-gradient(ellipse at 50% 55%, transparent 74%, rgba(255, 255, 255, 0.02) 74.3%, transparent 74.6%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Animated ripple rings from center */
+.hero-ripple-ring {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 0 8px rgba(255, 255, 255, 0.06),
+    inset 0 0 8px rgba(255, 255, 255, 0.03);
+  animation: heroRippleExpand 6s ease-out infinite;
   pointer-events: none;
 }
 
-.hero-bubble-1 {
-  width: 300px;
-  height: 300px;
-  top: 10%;
-  left: -5%;
-  animation: float 8s ease-in-out infinite;
+.hero-ripple-ring:nth-child(1) {
+  animation-delay: 0s;
+}
+.hero-ripple-ring:nth-child(2) {
+  animation-delay: 1.5s;
+}
+.hero-ripple-ring:nth-child(3) {
+  animation-delay: 3s;
+}
+.hero-ripple-ring:nth-child(4) {
+  animation-delay: 4.5s;
 }
 
-.hero-bubble-2 {
-  width: 200px;
-  height: 200px;
-  top: 60%;
-  right: -3%;
-  animation: float 6s ease-in-out infinite 2s;
+@keyframes heroRippleExpand {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(8);
+    opacity: 0;
+  }
 }
 
-.hero-bubble-3 {
-  width: 150px;
-  height: 150px;
-  bottom: 15%;
-  left: 20%;
-  animation: float 10s ease-in-out infinite 4s;
+/* Product floating animation */
+.hero-product-float {
+  animation: heroProductFloat 4s ease-in-out infinite;
 }
 
-.hero-bubble-4 {
-  width: 100px;
-  height: 100px;
-  top: 30%;
-  right: 25%;
-  animation: floatReverse 7s ease-in-out infinite 1s;
-}
-
-@keyframes float {
+@keyframes heroProductFloat {
   0%,
   100% {
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Shadow under product - synced with float */
+.hero-product-shadow {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 30px;
+  background: radial-gradient(
+    ellipse,
+    rgba(0, 0, 0, 0.12) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: heroShadowPulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes heroShadowPulse {
+  0%,
+  100% {
+    transform: translateX(-50%) scaleX(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(-50%) scaleX(0.7);
     opacity: 0.3;
-  }
-  50% {
-    transform: translateY(-30px) scale(1.1);
-    opacity: 0.6;
-  }
-}
-
-@keyframes floatReverse {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
-    opacity: 0.2;
-  }
-  50% {
-    transform: translateY(20px) scale(0.9);
-    opacity: 0.5;
   }
 }
 
@@ -270,6 +283,61 @@ body {
 
 .geometric-pattern::after {
   right: 0;
+}
+
+/* ===== Sparkle Field (Solution Section) ===== */
+.sparkle-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sparkle-field-a {
+  background-image:
+    radial-gradient(1.5px 1.5px at 8% 12%, rgba(168,216,234,0.9), transparent),
+    radial-gradient(1px 1px at 22% 38%, rgba(200,200,200,0.7), transparent),
+    radial-gradient(2px 2px at 42% 8%, rgba(168,216,234,0.6), transparent),
+    radial-gradient(1px 1px at 58% 28%, rgba(220,220,220,0.8), transparent),
+    radial-gradient(1.5px 1.5px at 78% 18%, rgba(168,216,234,0.7), transparent),
+    radial-gradient(1px 1px at 92% 42%, rgba(200,200,200,0.6), transparent),
+    radial-gradient(2px 2px at 15% 62%, rgba(220,220,220,0.7), transparent),
+    radial-gradient(1px 1px at 35% 78%, rgba(168,216,234,0.8), transparent),
+    radial-gradient(1.5px 1.5px at 52% 55%, rgba(200,200,200,0.6), transparent),
+    radial-gradient(1px 1px at 68% 72%, rgba(168,216,234,0.7), transparent),
+    radial-gradient(2px 2px at 88% 65%, rgba(220,220,220,0.5), transparent),
+    radial-gradient(1px 1px at 5% 88%, rgba(168,216,234,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 48% 92%, rgba(200,200,200,0.7), transparent),
+    radial-gradient(1px 1px at 82% 85%, rgba(168,216,234,0.5), transparent);
+  animation: sparklePulse 4s ease-in-out infinite;
+}
+
+.sparkle-field-b {
+  background-image:
+    radial-gradient(1px 1px at 12% 25%, rgba(220,220,220,0.8), transparent),
+    radial-gradient(1.5px 1.5px at 28% 52%, rgba(168,216,234,0.7), transparent),
+    radial-gradient(1px 1px at 48% 18%, rgba(200,200,200,0.9), transparent),
+    radial-gradient(2px 2px at 65% 45%, rgba(168,216,234,0.6), transparent),
+    radial-gradient(1px 1px at 85% 30%, rgba(220,220,220,0.7), transparent),
+    radial-gradient(1.5px 1.5px at 95% 58%, rgba(168,216,234,0.5), transparent),
+    radial-gradient(1px 1px at 18% 48%, rgba(200,200,200,0.7), transparent),
+    radial-gradient(2px 2px at 38% 65%, rgba(168,216,234,0.8), transparent),
+    radial-gradient(1px 1px at 55% 82%, rgba(220,220,220,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 72% 58%, rgba(200,200,200,0.7), transparent),
+    radial-gradient(1px 1px at 90% 78%, rgba(168,216,234,0.6), transparent),
+    radial-gradient(2px 2px at 25% 90%, rgba(220,220,220,0.5), transparent),
+    radial-gradient(1px 1px at 62% 95%, rgba(168,216,234,0.7), transparent),
+    radial-gradient(1.5px 1.5px at 75% 10%, rgba(200,200,200,0.8), transparent);
+  animation: sparklePulse 4s ease-in-out infinite reverse;
+}
+
+@keyframes sparklePulse {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 /* ===== CTA Button Glow ===== */

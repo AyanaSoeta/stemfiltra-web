@@ -51,64 +51,64 @@ export default function Home() {
   return (
     <main className="overflow-hidden">
       {/* ==================== 1. Hero Section ==================== */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center hero-gradient overflow-hidden">
-        {/* Bubble decorations */}
-        <div className="hero-bubble hero-bubble-1" />
-        <div className="hero-bubble hero-bubble-2" />
-        <div className="hero-bubble hero-bubble-3" />
-        <div className="hero-bubble hero-bubble-4" />
+      <section className="hero-water-bg relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+        {/* Animated ripple rings emanating from center */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="hero-ripple-ring" />
+          <div className="hero-ripple-ring" />
+          <div className="hero-ripple-ring" />
+          <div className="hero-ripple-ring" />
+        </div>
 
-        {/* Wave SVG decoration */}
-        <svg
-          className="absolute bottom-0 left-0 w-full"
-          viewBox="0 0 1440 120"
-          fill="none"
-          preserveAspectRatio="none"
-          style={{ height: "80px" }}
-        >
-          <path
-            d="M0,60 C240,120 480,0 720,60 C960,120 1200,0 1440,60 L1440,120 L0,120 Z"
-            fill="rgba(255,255,255,0.15)"
-          />
-          <path
-            d="M0,80 C360,20 720,100 1080,40 C1260,10 1380,50 1440,80 L1440,120 L0,120 Z"
-            fill="rgba(255,255,255,0.1)"
-          />
-        </svg>
-
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-20">
-          {/* Catch copy - right aligned */}
-          <div className="text-right mb-16 fade-in">
-            <h1 className="font-serif-jp text-4xl md:text-6xl lg:text-7xl text-white leading-tight mb-2">
+        <div className="relative z-10 flex flex-col items-center justify-center text-center w-full max-w-6xl mx-auto px-6 py-16 md:py-20">
+          {/* Catch copy - above product */}
+          <div className="mb-6 md:mb-10 fade-in">
+            <h1
+              className="font-serif-jp text-3xl md:text-5xl lg:text-7xl text-white leading-tight mb-1 md:mb-2"
+              style={{ textShadow: "0 2px 20px rgba(0,0,0,0.15)" }}
+            >
               脳からめぐる
             </h1>
-            <h1 className="font-serif-jp text-4xl md:text-6xl lg:text-7xl text-white leading-tight mb-6">
+            <h1
+              className="font-serif-jp text-3xl md:text-5xl lg:text-7xl text-white leading-tight"
+              style={{ textShadow: "0 2px 20px rgba(0,0,0,0.15)" }}
+            >
               エクソソームの真価
             </h1>
-            <p className="text-base md:text-xl tracking-[0.3em] text-white/80">
-              Stem Filtra Activation
-            </p>
           </div>
 
-          {/* Product bottle image */}
-          <div className="flex justify-center mb-10 fade-in fade-in-delay-1">
-            <div className="relative w-[250px] h-[350px] md:w-[300px] md:h-[400px] bg-gradient-to-br from-white/20 to-white/5 rounded-2xl flex items-center justify-center overflow-hidden">
-              <Image
-                src="/images/hero-bottle.png"
-                alt="Stem Filtra Activation ボトル"
-                width={300}
-                height={400}
-                className="object-contain"
-                priority
-              />
+          {/* Product bottle image - floating animation */}
+          {/* 背景透過PNGを /images/hero-bottle.png に配置してください */}
+          <div className="relative mb-6 md:mb-10 fade-in fade-in-delay-1">
+            <div className="hero-product-float">
+              <div className="relative w-[200px] h-[280px] md:w-[280px] md:h-[380px] lg:w-[320px] lg:h-[430px]">
+                <Image
+                  src="/images/hero-bottle.png"
+                  alt="Stem Filtra Activation ボトル"
+                  width={320}
+                  height={430}
+                  className="object-contain w-full h-full drop-shadow-[0_8px_30px_rgba(0,0,0,0.2)]"
+                  priority
+                />
+              </div>
             </div>
+            <div className="hero-product-shadow" />
           </div>
+
+          {/* Product name - below product */}
+          <p
+            className="text-sm md:text-lg lg:text-xl tracking-[0.3em] text-white/80 mb-8 md:mb-10 fade-in fade-in-delay-2"
+            style={{ textShadow: "0 1px 10px rgba(0,0,0,0.1)" }}
+          >
+            Stem Filtra Activation
+          </p>
 
           {/* CTA Button */}
-          <div className="flex justify-center fade-in fade-in-delay-2">
+          <div className="fade-in fade-in-delay-3">
             <Link
               href="/contact"
-              className="ghost-btn px-8 py-4 rounded-full text-white text-sm md:text-base tracking-wider inline-block"
+              className="inline-block px-8 py-4 rounded-full border border-white/50 text-white text-base tracking-wider backdrop-blur-sm hover:bg-white/10 hover:shadow-[0_0_25px_rgba(168,216,234,0.5)] hover:border-[#A8D8EA] transition-all duration-300"
+              style={{ textShadow: "0 1px 4px rgba(0,0,0,0.1)" }}
             >
               最新のエイジングケアを体験する
             </Link>
@@ -137,21 +137,21 @@ export default function Home() {
           <h2 className="font-serif-jp text-2xl md:text-3xl lg:text-4xl text-white text-center mb-16 fade-in">
             これまでのケアで満足していますか？
           </h2>
-          <div className="grid gap-4 mb-16">
+          <div className="flex flex-col gap-4 mb-16">
             {[
-              "最近、頭がスッキリしない。集中力が続かない...。",
-              "肌のハリが減ってきている気がする。",
-              "肌のくすみ、シミが気になる。",
-              "体の疲労感が抜けない。",
+              { text: "最近、頭がスッキリしない。集中力が続かない...。", align: "self-start" },
+              { text: "肌のくすみ、シミが気になる。", align: "self-end" },
+              { text: "肌のハリが減ってきている気がする。", align: "self-start" },
+              { text: "体の疲労感が抜けない。", align: "self-end" },
             ].map((item, i) => (
               <div
                 key={i}
-                className={`glass p-6 flex items-start gap-4 fade-in fade-in-delay-${i + 1}`}
+                className={`glass px-6 py-4 flex items-center gap-3 w-fit ${item.align} fade-in fade-in-delay-${i + 1}`}
               >
                 <span className="text-[#A8D8EA] text-xl flex-shrink-0">
                   ✓
                 </span>
-                <p className="text-white text-sm md:text-base">{item}</p>
+                <p className="text-white text-base md:whitespace-nowrap">{item.text}</p>
               </div>
             ))}
           </div>
@@ -162,13 +162,16 @@ export default function Home() {
       </section>
 
       {/* ==================== 4. Solution Section ==================== */}
-      <section className="relative py-20 md:py-32 bg-white science-lines">
+      <section className="relative py-20 md:py-32 bg-white science-lines overflow-hidden">
+        {/* Sparkle particles */}
+        <div className="sparkle-field sparkle-field-a" />
+        <div className="sparkle-field sparkle-field-b" />
         <div className="relative z-10 max-w-6xl mx-auto px-6">
           <h2 className="font-serif-jp text-2xl md:text-3xl lg:text-4xl text-[#333] text-center mb-4 fade-in">
-            脳から若返りスイッチを押す、次世代ホームケア。
+            脳から若返りスイッチを押す、<br className="md:hidden" />次世代ホームケア。
           </h2>
-          <p className="text-center text-[#A8D8EA] text-sm md:text-lg mb-16 fade-in fade-in-delay-1">
-            &ldquo;脳へ、届ける&rdquo; 新発想の幹細胞由来エクソソーム濾液
+          <p className="text-center text-[#A8D8EA] text-lg mb-16 fade-in fade-in-delay-1">
+            &ldquo;脳へ、届ける&rdquo;<br className="md:hidden" />新発想の幹細胞由来エクソソーム濾液
           </p>
           <div className="flex flex-col md:flex-row items-center gap-12">
             {/* Image - appears second on mobile, first on PC */}
@@ -185,7 +188,7 @@ export default function Home() {
             </div>
             {/* Text - appears first on mobile, second on PC */}
             <div className="w-full md:w-1/2 order-1 md:order-2 fade-in fade-in-delay-3">
-              <p className="text-[#333] text-sm md:text-base leading-relaxed">
+              <p className="text-[#333] text-base leading-relaxed">
                 口からの摂取や、通常の血管投与では、私たちの体にある強力な関門（血液脳関門）に阻まれ、成分の多くが届く前に排出されてしまいます。しかし、「鼻（嗅神経）」は、脳へと繋がる唯一のダイレクトパス。Stem
                 Filtraは、このルートに着目。希少なエクソソームをロスなく、最短距離で届けます。
               </p>
@@ -222,7 +225,7 @@ export default function Home() {
                 <h3 className="font-serif-jp text-xl md:text-2xl text-[#333] mb-4">
                   極小の「司令塔」カプセル
                 </h3>
-                <p className="text-sm md:text-base text-[#333] leading-relaxed">
+                <p className="text-base text-[#333] leading-relaxed">
                   エクソソームは単なる栄養素ではありません。内部には「細胞を動かす命令データ（miRNA等）」が凝縮されています。
                 </p>
               </div>
@@ -250,7 +253,7 @@ export default function Home() {
                 <h3 className="font-serif-jp text-xl md:text-2xl text-[#333] mb-4">
                   ダメージを検知し、スイッチON
                 </h3>
-                <p className="text-sm md:text-base text-[#333] leading-relaxed">
+                <p className="text-base text-[#333] leading-relaxed">
                   弱った細胞を見つけると、カプセルが融合し、修復のスイッチを入れます。細胞自身が内側から活性化し本来の働きを取り戻します。
                 </p>
               </div>
@@ -278,7 +281,7 @@ export default function Home() {
                 <h3 className="font-serif-jp text-xl md:text-2xl text-[#333] mb-4">
                   鼻から脳へ「最短ルート」のアプローチ
                 </h3>
-                <p className="text-sm md:text-base text-[#333] leading-relaxed">
+                <p className="text-base text-[#333] leading-relaxed">
                   消化管を通さず、成分を壊さない。鼻の奥にある脳への直結ルートを利用し、ロスなくスピード吸収を実現させました。
                 </p>
               </div>
@@ -306,7 +309,7 @@ export default function Home() {
                   className="object-contain w-full h-full"
                 />
               </div>
-              <p className="text-white/80 text-sm md:text-base">
+              <p className="text-white/80 text-base">
                 従来の上清液
               </p>
             </div>
@@ -320,12 +323,12 @@ export default function Home() {
                   className="object-contain w-full h-full"
                 />
               </div>
-              <p className="text-white/80 text-sm md:text-base">Stem Filtra</p>
+              <p className="text-white/80 text-base">Stem Filtra</p>
             </div>
           </div>
           <p className="text-right text-white/50 text-xs mb-12">※当社調べ</p>
 
-          <p className="text-white text-sm md:text-base leading-relaxed max-w-3xl mx-auto text-center mb-16 fade-in fade-in-delay-2">
+          <p className="text-white text-base leading-relaxed max-w-3xl mx-auto text-center mb-16 fade-in fade-in-delay-2">
             従来の上清液は培養した液体を使用するのに代わって、本製品は添加物などを使用することなく凍結融解処理にて有効成分の抽出、そこからさらに0.22μmのフィルター濾過滅菌処理を経て高濃度エクソソームを抽出。
           </p>
 
@@ -358,7 +361,7 @@ export default function Home() {
                     className="object-contain"
                   />
                 </div>
-                <p className="text-white text-sm md:text-base">{item.label}</p>
+                <p className="text-white text-base">{item.label}</p>
               </div>
             ))}
           </div>
@@ -471,7 +474,7 @@ export default function Home() {
                 <div className="text-[#A8D8EA] text-xl mb-4 tracking-wider">
                   ★★★★★
                 </div>
-                <p className="text-[#333] text-sm md:text-base leading-relaxed mb-6">
+                <p className="text-[#333] text-base leading-relaxed mb-6">
                   使い始めて一週間で寝起きの感覚が変わりました。朝はすっきり、夜はぐっすり寝れるようになりました。
                 </p>
                 <p className="text-[#8A8A8A] text-sm">Y.S 様</p>
@@ -507,7 +510,7 @@ export default function Home() {
             <p className="font-serif-jp text-4xl md:text-5xl lg:text-6xl text-white mb-2">
               ¥1,150,000
             </p>
-            <p className="text-white/70 text-sm md:text-base">
+            <p className="text-white/70 text-base">
               （税抜き・送料込み）
             </p>
           </div>
@@ -589,7 +592,7 @@ export default function Home() {
                   onClick={() => toggleFaq(i)}
                   className="w-full flex justify-between items-center py-6 text-left cursor-pointer"
                 >
-                  <span className="font-serif-jp text-sm md:text-base text-[#333] pr-4">
+                  <span className="font-serif-jp text-base text-[#333] pr-4">
                     Q. {faq.q}
                   </span>
                   <span className="text-2xl text-[#8A8A8A] flex-shrink-0 leading-none">
@@ -601,7 +604,7 @@ export default function Home() {
                     openFaq === i ? "max-h-96 pb-6" : "max-h-0"
                   }`}
                 >
-                  <p className="text-sm md:text-base text-[#555] leading-relaxed pl-6">
+                  <p className="text-base text-[#555] leading-relaxed pl-6">
                     A. {faq.a}
                   </p>
                 </div>
@@ -650,7 +653,7 @@ export default function Home() {
           <div className="fade-in fade-in-delay-1">
             <Link
               href="/contact"
-              className="inline-block px-10 py-4 rounded-full border border-white/40 text-white text-sm md:text-base tracking-wider hover:border-[#A8D8EA] hover:shadow-[0_0_20px_rgba(168,216,234,0.3)] transition-all duration-300"
+              className="inline-block px-10 py-4 rounded-full border border-white/40 text-white text-base tracking-wider hover:border-[#A8D8EA] hover:shadow-[0_0_20px_rgba(168,216,234,0.3)] transition-all duration-300"
             >
               お問い合わせはこちら
             </Link>
@@ -661,7 +664,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-12 md:py-16 bg-[#111111]">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <p className="text-white text-sm md:text-base mb-2">
+          <p className="text-white text-base mb-2">
             一般社団法人健康事業支援機構（HSO）
           </p>
           <p className="text-white/50 text-xs md:text-sm mb-8">
