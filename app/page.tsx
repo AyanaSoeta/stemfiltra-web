@@ -700,7 +700,7 @@ export default function Home() {
                 </p>
                 <div className="w-10 h-px bg-[#A8D8EA] mb-3 mx-auto md:mx-0" />
                 <p
-                  className="font-serif-jp text-sm md:text-base text-white/60 mb-6"
+                  className="text-sm md:text-base text-white/60 mb-6"
                   style={{ letterSpacing: "0.15em" }}
                 >
                   幹細胞濾液賦活剤
@@ -709,7 +709,7 @@ export default function Home() {
                   4本セット（1ヶ月分 / 1週間1本）
                 </p>
                 <div className="mb-2">
-                  <p className="font-serif-jp text-white font-bold">
+                  <p className="text-white font-bold">
                     <span className="text-2xl md:text-3xl align-baseline">¥</span>
                     <span className="text-4xl md:text-5xl">1,150,000</span>
                   </p>
