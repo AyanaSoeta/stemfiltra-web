@@ -606,3 +606,191 @@ body {
     border-radius: 55% 45% 42% 58%;
   }
 }
+
+/* ===== Hero Pearl Light Section ===== */
+.hero-pearl-bg {
+  background: radial-gradient(
+    ellipse at center,
+    #eef2ff 0%,
+    #f5f5fa 60%,
+    #ffffff 100%
+  );
+}
+
+/* Floating silver-blue particles */
+.hero-pearl-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(168, 180, 208, 0.92) 0%,
+    rgba(168, 180, 208, 0.42) 50%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+@keyframes heroPearlParticle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+  20%       { opacity: 0.65; }
+  50%       { transform: translateY(-30px) translateX(6px); opacity: 0.45; }
+  80%       { opacity: 0.22; }
+}
+
+@keyframes heroPearlParticleB {
+  0%, 100% { transform: translate(0, 0); opacity: 0; }
+  20%       { opacity: 0.55; }
+  50%       { transform: translate(-10px, -24px); opacity: 0.38; }
+  80%       { opacity: 0.18; }
+}
+
+@keyframes heroPearlParticleC {
+  0%, 100% { transform: translate(0, 0); opacity: 0; }
+  20%       { opacity: 0.70; }
+  50%       { transform: translate(12px, -38px); opacity: 0.50; }
+  80%       { opacity: 0.26; }
+}
+
+/* Bottle float — pearl variant (4px up/down, 3s cycle) */
+.hero-bottle-pearl-float {
+  animation: heroBottlePearlFloat 3s ease-in-out infinite;
+}
+
+@keyframes heroBottlePearlFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-4px); }
+}
+
+/* Staggered fade-up for hero text elements */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-animate-in {
+  animation-name: heroFadeUp;
+  animation-duration: 0.9s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+/* Ghost button — silver fill slides in on hover */
+.hero-ghost-silver {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(138, 138, 165, 0.45);
+  background: transparent;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.hero-ghost-silver::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(188, 188, 212, 0.30) 0%,
+    rgba(210, 210, 226, 0.18) 100%
+  );
+  transform: translateX(-101%);
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+
+.hero-ghost-silver > span {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-ghost-silver:hover::before {
+  transform: translateX(0);
+}
+
+.hero-ghost-silver:hover {
+  border-color: rgba(138, 138, 165, 0.72);
+  box-shadow: 0 0 18px rgba(150, 150, 180, 0.22);
+}
+
+/* ===== Hero Pearl — will-change optimization ===== */
+.hero-pearl-particle {
+  will-change: transform, opacity;
+}
+
+.hero-bottle-pearl-float {
+  will-change: transform;
+}
+
+/* ===== Hero Pearl — Water Ripple (z-1, bottle area) ===== */
+.hero-ripple-pearl {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 1px solid rgba(160, 170, 200, 0.6);
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation: heroPearlRipple 3.8s ease-out infinite;
+}
+
+@keyframes heroPearlRipple {
+  0%   { transform: translate(-50%, -50%) scale(0.12); opacity: 0.72; }
+  100% { transform: translate(-50%, -50%) scale(1.88); opacity: 0;    }
+}
+
+/* ===== Hero Pearl — Colored Glow Particles (z-0) ===== */
+.hero-glow-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.hero-glow-particle--gold {
+  background: radial-gradient(
+    circle at center,
+    rgba(168, 180, 208, 0.88) 0%,
+    rgba(178, 192, 218, 0.38) 50%,
+    transparent 70%
+  );
+}
+
+.hero-glow-particle--blue {
+  background: radial-gradient(
+    circle at center,
+    rgba(148, 168, 210, 0.92) 0%,
+    rgba(158, 178, 220, 0.40) 50%,
+    transparent 70%
+  );
+}
+
+.hero-glow-particle--white {
+  background: radial-gradient(
+    circle at center,
+    rgba(185, 195, 225, 0.90) 0%,
+    rgba(175, 188, 218, 0.38) 50%,
+    transparent 70%
+  );
+}
+
+@keyframes heroGlowParticleA {
+  0%, 100% { transform: translate(0, 0);          opacity: 0;    }
+  18%       {                                       opacity: 0.55; }
+  50%       { transform: translate(9px, -30px);    opacity: 0.42; }
+  82%       {                                       opacity: 0.18; }
+}
+
+@keyframes heroGlowParticleB {
+  0%, 100% { transform: translate(0, 0);           opacity: 0;    }
+  18%       {                                        opacity: 0.48; }
+  50%       { transform: translate(-12px, -22px);   opacity: 0.35; }
+  82%       {                                        opacity: 0.15; }
+}
+
+@keyframes heroGlowParticleC {
+  0%, 100% { transform: translate(0, 0);           opacity: 0;    }
+  18%       {                                        opacity: 0.62; }
+  50%       { transform: translate(14px, -36px);    opacity: 0.48; }
+  82%       {                                        opacity: 0.22; }
+}

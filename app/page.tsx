@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
+import HeroSection from "@/components/HeroSection";
 
 const ExosomeAboutSection = dynamic(
   () => import("@/components/ExosomeAboutSection"),
@@ -67,70 +68,7 @@ export default function Home() {
   return (
     <main className="overflow-hidden">
       {/* ==================== 1. Hero Section ==================== */}
-      <section className="hero-water-bg relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-        {/* Animated ripple rings emanating from center */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="hero-ripple-ring" />
-          <div className="hero-ripple-ring" />
-          <div className="hero-ripple-ring" />
-          <div className="hero-ripple-ring" />
-        </div>
-
-        <div className="relative z-10 flex flex-col items-center justify-center text-center w-full max-w-6xl mx-auto px-6 py-16 md:py-20">
-          {/* Catch copy - above product */}
-          <div className="mb-6 md:mb-10 fade-in">
-            <h1
-              className="font-serif-jp text-3xl md:text-5xl lg:text-7xl text-white leading-tight mb-1 md:mb-2"
-              style={{ textShadow: "0 2px 20px rgba(0,0,0,0.15)" }}
-            >
-              脳からめぐる
-            </h1>
-            <h1
-              className="font-serif-jp text-3xl md:text-5xl lg:text-7xl text-white leading-tight"
-              style={{ textShadow: "0 2px 20px rgba(0,0,0,0.15)" }}
-            >
-              エクソソームの真価
-            </h1>
-          </div>
-
-          {/* Product bottle image - floating animation */}
-          {/* 背景透過PNGを /images/hero-bottle.png に配置してください */}
-          <div className="relative mb-6 md:mb-10 fade-in fade-in-delay-1">
-            <div className="hero-product-float">
-              <div className="relative w-[200px] h-[280px] md:w-[280px] md:h-[380px] lg:w-[320px] lg:h-[430px]">
-                <Image
-                  src="/images/hero-bottle.png"
-                  alt="Stem Filtra Activation ボトル"
-                  width={320}
-                  height={430}
-                  className="object-contain w-full h-full drop-shadow-[0_8px_30px_rgba(0,0,0,0.2)]"
-                  priority
-                />
-              </div>
-            </div>
-            <div className="hero-product-shadow" />
-          </div>
-
-          {/* Product name - below product */}
-          <p
-            className="text-sm md:text-lg lg:text-xl tracking-[0.3em] text-white/80 mb-8 md:mb-10 fade-in fade-in-delay-2"
-            style={{ textShadow: "0 1px 10px rgba(0,0,0,0.1)" }}
-          >
-            Stem Filtra Activation
-          </p>
-
-          {/* CTA Button */}
-          <div className="fade-in fade-in-delay-3">
-            <Link
-              href="/contact"
-              className="inline-block px-8 py-4 rounded-full border border-white/50 text-white text-base tracking-wider backdrop-blur-sm hover:bg-white/10 hover:shadow-[0_0_25px_rgba(168,216,234,0.5)] hover:border-[#A8D8EA] transition-all duration-300"
-              style={{ textShadow: "0 1px 4px rgba(0,0,0,0.1)" }}
-            >
-              最新のエイジングケアを体験する
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HeroSection />
 
       {/* ==================== 2. Concept Section ==================== */}
       <section className="relative py-24 md:py-32 bg-[#F8F8F8] water-ripple">
