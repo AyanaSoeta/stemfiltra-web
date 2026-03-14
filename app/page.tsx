@@ -652,8 +652,14 @@ export default function Home() {
                     <span className="text-4xl md:text-5xl">1,150,000</span>
                   </p>
                 </div>
-                <p className="text-xs text-white/40">
-                  （税抜き・送料込み）
+                <p className="text-xs text-white/40 flex items-center justify-center gap-1.5">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="12" y1="2" x2="12" y2="22" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
+                    <line x1="19.07" y1="4.93" x2="4.93" y2="19.07" />
+                  </svg>
+                  税抜き・クール冷蔵送料込み
                 </p>
               </div>
             </div>
@@ -665,7 +671,7 @@ export default function Home() {
             style={{ transitionDelay: "0.6s" }}
           >
             <Link
-              href="/contact"
+              href="/purchase"
               className="cta-btn-primary inline-block px-12 py-5 md:px-16 md:py-6 rounded-[60px] text-base md:text-lg font-bold"
               style={{ letterSpacing: "0.1em" }}
             >
@@ -803,7 +809,7 @@ export default function Home() {
           </p>
           <div className="fade-in fade-in-delay-2">
             <Link
-              href="/contact"
+              href="/purchase"
               className="cta-glow inline-block px-12 py-5 rounded-full text-white text-base md:text-lg font-medium tracking-wider"
             >
               最新のエイジングケアを体験する
@@ -838,6 +844,23 @@ export default function Home() {
           <p className="text-white/50 text-xs md:text-sm mb-8">
             〒112-0002 東京都文京区小石川1丁目28-3 TN小石川ビル 2階 NIS
           </p>
+          <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2 mb-8">
+            <Link href="/tokushoho" className="text-white/50 text-xs hover:text-white/80 transition-colors duration-200">
+              特定商取引法に基づく表記
+            </Link>
+            <span className="text-white/20 text-xs">|</span>
+            <Link href="/privacy-policy" className="text-white/50 text-xs hover:text-white/80 transition-colors duration-200">
+              プライバシーポリシー
+            </Link>
+            <span className="text-white/20 text-xs">|</span>
+            <Link href="/terms" className="text-white/50 text-xs hover:text-white/80 transition-colors duration-200">
+              利用規約
+            </Link>
+            <span className="text-white/20 text-xs">|</span>
+            <Link href="/contact" className="text-white/50 text-xs hover:text-white/80 transition-colors duration-200">
+              お問い合わせ
+            </Link>
+          </nav>
           <p className="text-white/30 text-xs">
             © 2025 Health Support Organization. All rights reserved.
           </p>
