@@ -794,3 +794,109 @@ body {
   50%       { transform: translate(14px, -36px);    opacity: 0.48; }
   82%       {                                        opacity: 0.22; }
 }
+
+/* ===== USP Process Step Cards (9s cycle, each active for 0–33%) ===== */
+
+/* CSS classes to anchor keyframes (prevents tree-shaking) */
+.usp-card       { animation: uspStepCardGlow 9s ease-in-out infinite; }
+.usp-badge      { animation: uspStepBadgeGlow 9s ease-in-out infinite; }
+.usp-icon       { animation: uspStepIconGlow 9s ease-in-out infinite; }
+.usp-conn-line-1 { animation: uspConnLine1 9s ease-in-out infinite; }
+.usp-conn-line-2 { animation: uspConnLine2 9s ease-in-out infinite; }
+.usp-conn-arrow-1 { animation: uspConnArrow1 9s ease-in-out infinite; }
+.usp-conn-arrow-2 { animation: uspConnArrow2 9s ease-in-out infinite; }
+.usp-dot-h1     { animation: uspDotH1 9s linear infinite; position: absolute; }
+.usp-dot-h2     { animation: uspDotH2 9s linear infinite; position: absolute; }
+.usp-dot-v1     { animation: uspDotV1 9s linear infinite; position: absolute; }
+.usp-dot-v2     { animation: uspDotV2 9s linear infinite; position: absolute; }
+
+.usp-delay-0 { animation-delay: 0s; }
+.usp-delay-1 { animation-delay: -6s; }
+.usp-delay-2 { animation-delay: -3s; }
+
+/* Card border glow */
+@keyframes uspStepCardGlow {
+  0%   { border-color: rgba(255,255,255,0.18); box-shadow: none; }
+  6%   { border-color: rgba(168,216,234,0.72); box-shadow: 0 0 26px rgba(168,216,234,0.30), 0 0 52px rgba(168,216,234,0.07); }
+  27%  { border-color: rgba(168,216,234,0.72); box-shadow: 0 0 26px rgba(168,216,234,0.30), 0 0 52px rgba(168,216,234,0.07); }
+  36%  { border-color: rgba(255,255,255,0.18); box-shadow: none; }
+  100% { border-color: rgba(255,255,255,0.18); box-shadow: none; }
+}
+
+/* STEP badge text */
+@keyframes uspStepBadgeGlow {
+  0%   { color: rgba(168,216,234,0.28); }
+  6%   { color: rgba(168,216,234,0.95); }
+  27%  { color: rgba(168,216,234,0.95); }
+  36%  { color: rgba(168,216,234,0.28); }
+  100% { color: rgba(168,216,234,0.28); }
+}
+
+/* Icon container glow */
+@keyframes uspStepIconGlow {
+  0%   { background: rgba(255,255,255,0.04); box-shadow: none; }
+  6%   { background: rgba(168,216,234,0.11); box-shadow: 0 0 14px rgba(168,216,234,0.24); }
+  27%  { background: rgba(168,216,234,0.11); box-shadow: 0 0 14px rgba(168,216,234,0.24); }
+  36%  { background: rgba(255,255,255,0.04); box-shadow: none; }
+  100% { background: rgba(255,255,255,0.04); box-shadow: none; }
+}
+
+/* ── Connector 1 (card1→card2): active 25–33% of 9s ── */
+@keyframes uspConnLine1 {
+  0%,24%  { background: rgba(255,255,255,0.09); }
+  26%     { background: rgba(168,216,234,0.52); }
+  31%     { background: rgba(168,216,234,0.52); }
+  33%     { background: rgba(255,255,255,0.09); }
+  100%    { background: rgba(255,255,255,0.09); }
+}
+@keyframes uspConnArrow1 {
+  0%,24%  { border-top-color: rgba(255,255,255,0.12); border-right-color: rgba(255,255,255,0.12); }
+  26%     { border-top-color: rgba(168,216,234,0.85); border-right-color: rgba(168,216,234,0.85); }
+  31%     { border-top-color: rgba(168,216,234,0.85); border-right-color: rgba(168,216,234,0.85); }
+  33%     { border-top-color: rgba(255,255,255,0.12); border-right-color: rgba(255,255,255,0.12); }
+  100%    { border-top-color: rgba(255,255,255,0.12); border-right-color: rgba(255,255,255,0.12); }
+}
+@keyframes uspDotH1 {
+  0%,24%  { left: -4px; opacity: 0; }
+  25%     { left: -4px; opacity: 1; }
+  32%     { left: calc(100% + 4px); opacity: 1; }
+  33%     { left: calc(100% + 4px); opacity: 0; }
+  100%    { left: calc(100% + 4px); opacity: 0; }
+}
+@keyframes uspDotV1 {
+  0%,24%  { top: -4px; opacity: 0; }
+  25%     { top: -4px; opacity: 1; }
+  32%     { top: calc(100% + 4px); opacity: 1; }
+  33%     { top: calc(100% + 4px); opacity: 0; }
+  100%    { top: calc(100% + 4px); opacity: 0; }
+}
+
+/* ── Connector 2 (card2→card3): active 58–66% of 9s ── */
+@keyframes uspConnLine2 {
+  0%,57%  { background: rgba(255,255,255,0.09); }
+  59%     { background: rgba(168,216,234,0.52); }
+  64%     { background: rgba(168,216,234,0.52); }
+  66%     { background: rgba(255,255,255,0.09); }
+  100%    { background: rgba(255,255,255,0.09); }
+}
+@keyframes uspConnArrow2 {
+  0%,57%  { border-top-color: rgba(255,255,255,0.12); border-right-color: rgba(255,255,255,0.12); }
+  59%     { border-top-color: rgba(168,216,234,0.85); border-right-color: rgba(168,216,234,0.85); }
+  64%     { border-top-color: rgba(168,216,234,0.85); border-right-color: rgba(168,216,234,0.85); }
+  66%     { border-top-color: rgba(255,255,255,0.12); border-right-color: rgba(255,255,255,0.12); }
+  100%    { border-top-color: rgba(255,255,255,0.12); border-right-color: rgba(255,255,255,0.12); }
+}
+@keyframes uspDotH2 {
+  0%,57%  { left: -4px; opacity: 0; }
+  58%     { left: -4px; opacity: 1; }
+  65%     { left: calc(100% + 4px); opacity: 1; }
+  66%     { left: calc(100% + 4px); opacity: 0; }
+  100%    { left: calc(100% + 4px); opacity: 0; }
+}
+@keyframes uspDotV2 {
+  0%,57%  { top: -4px; opacity: 0; }
+  58%     { top: -4px; opacity: 1; }
+  65%     { top: calc(100% + 4px); opacity: 1; }
+  66%     { top: calc(100% + 4px); opacity: 0; }
+  100%    { top: calc(100% + 4px); opacity: 0; }
+}

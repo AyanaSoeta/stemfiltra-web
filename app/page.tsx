@@ -23,16 +23,16 @@ const ExosomeAboutSection = dynamic(
 
 const faqData = [
   {
-    q: "なぜ鼻からの摂取なんですか？",
-    a: "鼻粘膜には血管が豊富に存在し、さらに脳へ直接つながる「嗅神経」のルートがあるためです。点滴やサプリメントに比べ、成分が全身や脳へ効率よく届きやすい（DDS：ドラッグデリバリーシステム）というメリットがあります。",
+    q: "なぜ鼻からの使用なんですか？",
+    a: "鼻粘膜には血管が豊富に存在し、さらに脳へ直接つながる「嗅神経」のルートがあるためです。経口摂取や通常の血管内投与に比べ、成分が全身や鼻腔内に広がりやすい（経鼻吸収）という特性があります。",
   },
   {
-    q: "どれくらいで効果を実感できますか？",
-    a: "個人差はありますが、早い方では使用直後から頭のスッキリ感（ブレインフォグの解消）を実感されます。エイジングケアや体調管理を目的とする場合は、まずは1〜3ヶ月程度の継続をおすすめしています。",
+    q: "どれくらいで変化を感じられますか？",
+    a: "個人差はありますが、早い方では使用後比較的すぐに変化をお感じになる方もいらっしゃいます（※個人の感想です。効果・効能を示すものではありません）。継続的なエイジングケアを目的とする場合は、まずは1〜3ヶ月程度の継続をおすすめしています。",
   },
   {
-    q: "副作用はありますか？",
-    a: "本製品は医薬品ではなく、ヒト由来の成分を精製したものです。現在のところ、重大な副作用の報告はございません。万が一、鼻粘膜に刺激を感じたり体調に異変を感じた場合は、使用を中止し医師にご相談ください。",
+    q: "使用上の注意はありますか？",
+    a: "本製品は医薬品ではなく、ヒト由来の成分を精製したものです。現在のところ、重大な健康被害の報告はございません。万が一、鼻粘膜に刺激を感じたり体調に異変を感じた場合は、使用を中止し医師にご相談ください。",
   },
   {
     q: "安全性は確保されていますか？",
@@ -110,7 +110,7 @@ export default function Home() {
             ))}
           </div>
           <p className="font-serif-jp text-lg md:text-xl lg:text-2xl text-[#A8D8EA] text-center leading-relaxed fade-in">
-            その原因は、成分が「必要な場所に届いていない」からかもしれません。
+            そのお悩み、成分が「必要な場所に届いていない」ことが一因かもしれません。
           </p>
         </div>
       </section>
@@ -122,10 +122,10 @@ export default function Home() {
         <div className="sparkle-field sparkle-field-b" />
         <div className="relative z-10 max-w-6xl mx-auto px-6">
           <h2 className="font-serif-jp text-2xl md:text-3xl lg:text-4xl text-[#333] text-center mb-4 fade-in">
-            脳から若返りスイッチを押す、<br className="md:hidden" />次世代ホームケア。
+            脳へのルートを活用する、<br className="md:hidden" />次世代ホームケア。
           </h2>
           <p className="text-center text-[#A8D8EA] text-lg mb-16 fade-in fade-in-delay-1">
-            &ldquo;脳へ、届ける&rdquo;<br className="md:hidden" />新発想の幹細胞由来エクソソーム濾液
+            &ldquo;経鼻吸収&rdquo;という<br className="md:hidden" />新発想の幹細胞由来エクソソーム濾液
           </p>
           <div className="flex flex-col md:flex-row items-center gap-12">
             {/* Image - appears second on mobile, first on PC */}
@@ -143,8 +143,8 @@ export default function Home() {
             {/* Text - appears first on mobile, second on PC */}
             <div className="w-full md:w-1/2 order-1 md:order-2 fade-in fade-in-delay-3">
               <p className="text-[#333] text-base leading-relaxed">
-                口からの摂取や、通常の血管投与では、私たちの体にある強力な関門（血液脳関門）に阻まれ、成分の多くが届く前に排出されてしまいます。しかし、「鼻（嗅神経）」は、脳へと繋がる唯一のダイレクトパス。Stem
-                Filtraは、このルートに着目。希少なエクソソームをロスなく、最短距離で届けます。
+                経口摂取や通常の血管内投与に比べ、鼻腔内には血管が豊富であり、「嗅神経」を介して脳に隣接するルートが存在します。Stem Filtraは、この経鼻吸収という特性に着目。希少なエクソソームをロスなく、最短距離でアプローチします。
+                <br /><span className="text-xs text-[#999] block mt-2">※本製品は医薬品ではなく、脳への直接作用・治療効果を示すものではありません。</span>
               </p>
             </div>
           </div>
@@ -158,7 +158,7 @@ export default function Home() {
       <section className="py-20 md:py-32 bg-[#1A1A1A]">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="font-serif-jp text-2xl md:text-3xl lg:text-4xl text-white text-center mb-16 fade-in">
-            不純物を許さない、医療レベルの濾過
+            不純物を許さない、高精度な濾過プロセス
           </h2>
 
           {/* Comparison images */}
@@ -196,38 +196,162 @@ export default function Home() {
             従来の上清液は培養した液体を使用するのに代わって、本製品は添加物などを使用することなく凍結融解処理にて有効成分の抽出、そこからさらに0.22μmのフィルター濾過滅菌処理を経て高濃度エクソソームを抽出。
           </p>
 
-          {/* Feature icons */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in fade-in-delay-3">
-            {[
-              {
-                src: "/images/icon-freeze.png",
-                alt: "凍結融解処理アイコン",
-                label: "凍結融解処理",
-              },
-              {
-                src: "/images/icon-filter.png",
-                alt: "0.22μm濾過滅菌アイコン",
-                label: "0.22μm濾過滅菌",
-              },
-              {
-                src: "/images/icon-purify.png",
-                alt: "高濃度精製アイコン",
-                label: "高濃度精製",
-              },
-            ].map((item, i) => (
-              <div key={i} className="glass p-8 text-center">
-                <div className="relative w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-white/10 to-white/5 rounded-full overflow-hidden flex items-center justify-center">
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    width={80}
-                    height={80}
-                    className="object-contain"
-                  />
+          {/* Feature icons — sequential step process */}
+          <div className="fade-in fade-in-delay-3">
+            <div className="flex flex-col md:flex-row items-stretch">
+
+              {/* ── STEP 01: 凍結融解処理 ── */}
+              <div
+                className="glass flex-1 p-8 text-center"
+                style={{ animation: "uspStepCardGlow 9s ease-in-out infinite", animationDelay: "0s" }}
+              >
+                <p
+                  className="text-[10px] tracking-[0.3em] mb-5 font-zen"
+                  style={{ animation: "uspStepBadgeGlow 9s ease-in-out infinite", animationDelay: "0s" }}
+                >
+                  STEP 01
+                </p>
+                <div
+                  className="relative w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden flex items-center justify-center"
+                  style={{ animation: "uspStepIconGlow 9s ease-in-out infinite", animationDelay: "0s" }}
+                >
+                  <Image src="/images/icon-freeze.png" alt="凍結融解処理アイコン" width={80} height={80} className="object-contain" />
                 </div>
-                <p className="text-white text-base">{item.label}</p>
+                <p className="text-white text-base font-medium mb-2">凍結融解処理</p>
+                <p className="text-white/45 text-xs leading-relaxed">幹細胞を凍結・融解し<br />有効成分を抽出</p>
               </div>
-            ))}
+
+              {/* ── Connector 1 ── */}
+              {/* Desktop: horizontal */}
+              <div className="hidden md:flex items-center justify-center flex-shrink-0" style={{ width: "52px" }}>
+                <div className="relative w-full" style={{ height: "1px", overflow: "visible" }}>
+                  <div style={{ position: "absolute", inset: 0, animation: "uspConnLine1 9s ease-in-out infinite" }} />
+                  <div style={{
+                    position: "absolute", right: "-5px", top: "50%",
+                    transform: "translateY(-50%) rotate(45deg)",
+                    width: "7px", height: "7px",
+                    borderTop: "1.5px solid rgba(255,255,255,0.12)",
+                    borderRight: "1.5px solid rgba(255,255,255,0.12)",
+                    animation: "uspConnArrow1 9s ease-in-out infinite",
+                  }} />
+                  <div style={{
+                    position: "absolute", top: "50%", transform: "translateY(-50%)",
+                    width: "7px", height: "7px", borderRadius: "50%",
+                    background: "radial-gradient(circle, #A8D8EA 0%, rgba(168,216,234,0.3) 100%)",
+                    boxShadow: "0 0 8px rgba(168,216,234,0.9), 0 0 16px rgba(168,216,234,0.4)",
+                    animation: "uspDotH1 9s linear infinite",
+                  }} />
+                </div>
+              </div>
+              {/* Mobile: vertical */}
+              <div className="md:hidden flex justify-center" style={{ height: "44px" }}>
+                <div className="relative" style={{ width: "1px", height: "100%", overflow: "visible" }}>
+                  <div style={{ position: "absolute", inset: 0, animation: "uspConnLine1 9s ease-in-out infinite" }} />
+                  <div style={{
+                    position: "absolute", bottom: "-5px", left: "50%",
+                    transform: "translateX(-50%) rotate(135deg)",
+                    width: "7px", height: "7px",
+                    borderTop: "1.5px solid rgba(255,255,255,0.12)",
+                    borderRight: "1.5px solid rgba(255,255,255,0.12)",
+                    animation: "uspConnArrow1 9s ease-in-out infinite",
+                  }} />
+                  <div style={{
+                    position: "absolute", left: "50%", transform: "translateX(-50%)",
+                    width: "7px", height: "7px", borderRadius: "50%",
+                    background: "radial-gradient(circle, #A8D8EA 0%, rgba(168,216,234,0.3) 100%)",
+                    boxShadow: "0 0 8px rgba(168,216,234,0.9)",
+                    animation: "uspDotV1 9s linear infinite",
+                  }} />
+                </div>
+              </div>
+
+              {/* ── STEP 02: 0.22μm濾過滅菌 ── */}
+              <div
+                className="glass flex-1 p-8 text-center"
+                style={{ animation: "uspStepCardGlow 9s ease-in-out infinite", animationDelay: "-6s" }}
+              >
+                <p
+                  className="text-[10px] tracking-[0.3em] mb-5 font-zen"
+                  style={{ animation: "uspStepBadgeGlow 9s ease-in-out infinite", animationDelay: "-6s" }}
+                >
+                  STEP 02
+                </p>
+                <div
+                  className="relative w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden flex items-center justify-center"
+                  style={{ animation: "uspStepIconGlow 9s ease-in-out infinite", animationDelay: "-6s" }}
+                >
+                  <Image src="/images/icon-filter.png" alt="0.22μm濾過滅菌アイコン" width={80} height={80} className="object-contain" />
+                </div>
+                <p className="text-white text-base font-medium mb-2">0.22μm濾過滅菌</p>
+                <p className="text-white/45 text-xs leading-relaxed">超精密フィルターで<br />不純物を徹底除去</p>
+              </div>
+
+              {/* ── Connector 2 ── */}
+              {/* Desktop: horizontal */}
+              <div className="hidden md:flex items-center justify-center flex-shrink-0" style={{ width: "52px" }}>
+                <div className="relative w-full" style={{ height: "1px", overflow: "visible" }}>
+                  <div style={{ position: "absolute", inset: 0, animation: "uspConnLine2 9s ease-in-out infinite" }} />
+                  <div style={{
+                    position: "absolute", right: "-5px", top: "50%",
+                    transform: "translateY(-50%) rotate(45deg)",
+                    width: "7px", height: "7px",
+                    borderTop: "1.5px solid rgba(255,255,255,0.12)",
+                    borderRight: "1.5px solid rgba(255,255,255,0.12)",
+                    animation: "uspConnArrow2 9s ease-in-out infinite",
+                  }} />
+                  <div style={{
+                    position: "absolute", top: "50%", transform: "translateY(-50%)",
+                    width: "7px", height: "7px", borderRadius: "50%",
+                    background: "radial-gradient(circle, #A8D8EA 0%, rgba(168,216,234,0.3) 100%)",
+                    boxShadow: "0 0 8px rgba(168,216,234,0.9), 0 0 16px rgba(168,216,234,0.4)",
+                    animation: "uspDotH2 9s linear infinite",
+                  }} />
+                </div>
+              </div>
+              {/* Mobile: vertical */}
+              <div className="md:hidden flex justify-center" style={{ height: "44px" }}>
+                <div className="relative" style={{ width: "1px", height: "100%", overflow: "visible" }}>
+                  <div style={{ position: "absolute", inset: 0, animation: "uspConnLine2 9s ease-in-out infinite" }} />
+                  <div style={{
+                    position: "absolute", bottom: "-5px", left: "50%",
+                    transform: "translateX(-50%) rotate(135deg)",
+                    width: "7px", height: "7px",
+                    borderTop: "1.5px solid rgba(255,255,255,0.12)",
+                    borderRight: "1.5px solid rgba(255,255,255,0.12)",
+                    animation: "uspConnArrow2 9s ease-in-out infinite",
+                  }} />
+                  <div style={{
+                    position: "absolute", left: "50%", transform: "translateX(-50%)",
+                    width: "7px", height: "7px", borderRadius: "50%",
+                    background: "radial-gradient(circle, #A8D8EA 0%, rgba(168,216,234,0.3) 100%)",
+                    boxShadow: "0 0 8px rgba(168,216,234,0.9)",
+                    animation: "uspDotV2 9s linear infinite",
+                  }} />
+                </div>
+              </div>
+
+              {/* ── STEP 03: 高濃度精製 ── */}
+              <div
+                className="glass flex-1 p-8 text-center"
+                style={{ animation: "uspStepCardGlow 9s ease-in-out infinite", animationDelay: "-3s" }}
+              >
+                <p
+                  className="text-[10px] tracking-[0.3em] mb-5 font-zen"
+                  style={{ animation: "uspStepBadgeGlow 9s ease-in-out infinite", animationDelay: "-3s" }}
+                >
+                  STEP 03
+                </p>
+                <div
+                  className="relative w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden flex items-center justify-center"
+                  style={{ animation: "uspStepIconGlow 9s ease-in-out infinite", animationDelay: "-3s" }}
+                >
+                  <Image src="/images/icon-purify.png" alt="高濃度精製アイコン" width={80} height={80} className="object-contain" />
+                </div>
+                <p className="text-white text-base font-medium mb-2">高濃度精製</p>
+                <p className="text-white/45 text-xs leading-relaxed">エクソソームを<br />高濃度に凝縮</p>
+              </div>
+
+            </div>
           </div>
         </div>
       </section>
@@ -567,6 +691,9 @@ export default function Home() {
               </div>
             ))}
           </div>
+          <p className="text-center text-[#AAAAAA] text-xs mt-8 fade-in">
+            ※掲載の内容はお客様個人の感想です。効果・効能を示すものではありません。個人差があります。
+          </p>
         </div>
       </section>
 
@@ -805,7 +932,7 @@ export default function Home() {
             </div>
           </div>
           <p className="font-serif-jp text-2xl md:text-3xl lg:text-4xl text-white mb-10 leading-relaxed fade-in fade-in-delay-1">
-            あなたの&ldquo;若返りスイッチ&rdquo;を、今日から。
+            あなたのエイジングケアを、今日から。
           </p>
           <div className="fade-in fade-in-delay-2">
             <Link
@@ -861,6 +988,14 @@ export default function Home() {
               お問い合わせ
             </Link>
           </nav>
+
+          {/* 薬機法・景品表示法に基づく免責表記 */}
+          <div className="border-t border-white/10 pt-8 mb-6">
+            <p className="text-white/25 text-[10px] leading-[1.9] tracking-[0.05em] max-w-3xl mx-auto">
+              【免責事項】本製品は医薬品・医療機器ではありません。疾病の診断・治療・予防を目的としたものではありません。本サイトに掲載されているお客様の声・体験談は個人の感想であり、すべての方に同様の効果があることを示すものではありません。本製品の使用に際しては、体調に異変を感じた場合は直ちに使用を中止し、医師にご相談ください。妊娠中・授乳中の方、疾患をお持ちの方は使用前に医師にご相談ください。
+            </p>
+          </div>
+
           <p className="text-white/30 text-xs">
             © 2025 Health Support Organization. All rights reserved.
           </p>
