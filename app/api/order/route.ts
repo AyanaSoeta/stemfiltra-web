@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-const NOTIFY_TO = "hso.info.k@gmail.com";
+const NOTIFY_TO = "hso.info.k@gmail.com, ayana.soeta@gmail.com";
 const PRICE_EX_TAX = 1_200_000;
 const TAX = Math.floor(PRICE_EX_TAX * 0.1);
 const PRICE_IN_TAX = PRICE_EX_TAX + TAX;
