@@ -48,7 +48,7 @@ const GLOW_PARTICLES: {
 
 export default function HeroSection() {
   return (
-    <section className="hero-pearl-bg relative min-h-screen flex items-center overflow-hidden">
+    <section className="hero-pearl-bg relative h-[844px] md:min-h-screen md:flex md:items-center overflow-hidden">
 
       {/* ════════════════════════════════════════════════════
           z-0  背景レイヤー
@@ -263,27 +263,27 @@ export default function HeroSection() {
       {/* ════════════════════════════════════════════════════
           z-10  前面レイヤー: テキスト・ボトル・ボタン
       ════════════════════════════════════════════════════ */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-24 md:py-0 md:min-h-screen md:flex md:items-center">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-0 md:pt-0 md:pb-0 md:py-0 md:min-h-screen md:flex md:items-center h-full flex items-center">
         <div className="flex flex-col md:flex-row md:items-center md:gap-14 lg:gap-24 w-full">
 
           {/* テキスト列 */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left flex-1">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left flex-1 relative z-10 -mt-28 md:mt-0">
 
             <p
-              className="hero-animate-in font-zen text-[10px] md:text-[11px] tracking-[0.3em] text-[#2d2d2d]/40 mb-7 md:mb-9 uppercase"
+              className="hero-animate-in font-zen text-[10px] md:text-[11px] tracking-[0.3em] text-[#2d2d2d]/40 mb-3 md:mb-9 uppercase"
               style={{ animationDelay: "0s" }}
             >
               STEM FILTRA ACTIVATION
             </p>
 
             <div
-              className="hero-animate-in mb-11 md:mb-14"
+              className="hero-animate-in mb-5 md:mb-14"
               style={{ animationDelay: "0.3s" }}
             >
-              <h1 className="font-shippori text-[1.9rem] leading-[1.55] md:text-[2.75rem] lg:text-[3.4rem] text-[#2d2d2d] tracking-wide">
+              <h1 className="font-shippori text-[1.7rem] leading-[1.5] md:text-[2.75rem] lg:text-[3.4rem] text-[#2d2d2d] tracking-wide">
                 脳からめぐる
               </h1>
-              <h1 className="font-shippori text-[1.9rem] leading-[1.55] md:text-[2.75rem] lg:text-[3.4rem] text-[#2d2d2d] tracking-wide">
+              <h1 className="font-shippori text-[1.7rem] leading-[1.5] md:text-[2.75rem] lg:text-[3.4rem] text-[#2d2d2d] tracking-wide">
                 エクソソームの真価
               </h1>
             </div>
@@ -294,13 +294,13 @@ export default function HeroSection() {
             >
               <Link
                 href="/purchase"
-                className="hero-ghost-silver inline-block px-8 py-[14px] md:px-10 md:py-4 rounded-full text-[13px] md:text-sm tracking-[0.14em] text-[#2d2d2d]"
+                className="hero-ghost-silver inline-block px-7 py-3 md:px-10 md:py-4 rounded-full text-[12px] md:text-sm tracking-[0.14em] text-[#2d2d2d]"
               >
                 <span>最新のエイジングケアを体験する</span>
               </Link>
               {/* クール冷蔵配送バッジ */}
               <div
-                className="flex items-center justify-center md:justify-start gap-3 mt-4"
+                className="flex items-center justify-center md:justify-start gap-3 mt-3 md:mt-4"
                 style={{ opacity: 0.45 }}
               >
                 <span className="flex items-center gap-1 text-[10px] tracking-[0.12em] text-[#2d2d2d]">
@@ -320,8 +320,8 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* ボトル列 */}
-          <div className="flex justify-center mt-14 md:mt-0 md:flex-shrink-0">
+          {/* ボトル列: SPでは右下に絶対配置 */}
+          <div className="flex justify-center mt-4 md:mt-0 md:flex-shrink-0">
             <div className="relative">
 
               {/* z-[1]: 水面リップル */}
@@ -340,9 +340,9 @@ export default function HeroSection() {
                 <Image
                   src="/images/bottle.png"
                   alt="Stem Filtra Activation ボトル"
-                  width={260}
-                  height={380}
-                  className="object-contain w-[175px] md:w-[210px] lg:w-[255px] h-auto"
+                  width={400}
+                  height={580}
+                  className="object-contain w-[160px] md:w-[300px] lg:w-[360px] h-auto"
                   style={{
                     filter:
                       "drop-shadow(0 14px 32px rgba(115, 115, 145, 0.20)) drop-shadow(0 4px 12px rgba(75, 75, 100, 0.10))",
@@ -355,6 +355,14 @@ export default function HeroSection() {
           </div>
 
         </div>
+      </div>
+
+      {/* スクロールインジケーター（SPのみ） */}
+      <div className="absolute bottom-[56px] left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 md:hidden animate-bounce">
+        <span className="text-[9px] tracking-[0.2em] text-[#2d2d2d]/30">SCROLL</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[#2d2d2d]/30">
+          <path d="M12 5v14M5 12l7 7 7-7" />
+        </svg>
       </div>
     </section>
   );

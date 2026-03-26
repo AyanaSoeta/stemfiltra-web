@@ -643,29 +643,18 @@ export default function Home() {
             </div>
           </div>
 
-          {/* YouTube embed placeholder */}
-          <div className="max-w-3xl mx-auto fade-in">
+          {/* TODO: 動画が準備できたら以下のコメントを解除し、VIDEO_IDを設定してください */}
+          {/* <div className="max-w-3xl mx-auto fade-in">
             <div className="relative w-full aspect-video bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl overflow-hidden flex items-center justify-center">
-              {/* YouTube URL をここに設定 - 以下のiframeのsrcにYouTube埋め込みURLを入れてください */}
-              {/* <iframe
+              <iframe
                 className="absolute inset-0 w-full h-full rounded-2xl"
                 src="https://www.youtube.com/embed/VIDEO_ID"
                 title="紹介動画"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-              /> */}
-              <div className="text-[#8A8A8A] text-center">
-                <svg
-                  className="w-16 h-16 mx-auto mb-2 opacity-50"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-                <p className="text-sm">動画準備中</p>
-              </div>
+              />
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -676,7 +665,20 @@ export default function Home() {
             お客様の声
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[0, 1, 2].map((i) => (
+            {[
+              {
+                text: "50代に入ってから朝の重だるさが抜けず悩んでいました。点鼻という新しい方法に半信半疑でしたが、使い始めて2週間ほどで目覚めが驚くほどすっきりするように。夜も深く眠れている実感があり、毎日が軽くなりました。",
+                name: "Y.S 様（52歳・女性）",
+              },
+              {
+                text: "年齢とともに肌のハリが気になっていたところ、知人の紹介で出会いました。1ヶ月ほど続けたあたりから、鏡を見るのが楽しみになるくらい肌の調子が整ってきて、周囲からも「最近なんか若々しいね」と言われるようになりました。",
+                name: "M.T 様（47歳・女性）",
+              },
+              {
+                text: "経営者として多忙な日々を送る中、集中力の低下や疲労の蓄積を感じていました。使い始めてから頭のクリアさが戻ってきた感覚があり、夕方以降もパフォーマンスが落ちにくくなりました。体のメンテナンスとして今後も続けたいと思います。",
+                name: "K.N 様（58歳・男性）",
+              },
+            ].map((review, i) => (
               <div
                 key={i}
                 className={`glass-light p-8 fade-in fade-in-delay-${i + 1}`}
@@ -685,9 +687,9 @@ export default function Home() {
                   ★★★★★
                 </div>
                 <p className="text-[#333] text-base leading-relaxed mb-6">
-                  使い始めて一週間で寝起きの感覚が変わりました。朝はすっきり、夜はぐっすり寝れるようになりました。
+                  {review.text}
                 </p>
-                <p className="text-[#8A8A8A] text-sm">Y.S 様</p>
+                <p className="text-[#8A8A8A] text-sm">{review.name}</p>
               </div>
             ))}
           </div>
@@ -776,7 +778,7 @@ export default function Home() {
                 <div className="mb-2">
                   <p className="text-white font-bold">
                     <span className="text-2xl md:text-3xl align-baseline">¥</span>
-                    <span className="text-4xl md:text-5xl">1,150,000</span>
+                    <span className="text-4xl md:text-5xl">1,200,000</span>
                   </p>
                 </div>
                 <p className="text-xs text-white/40 flex items-center justify-center gap-1.5">

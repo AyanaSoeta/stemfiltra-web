@@ -21,19 +21,19 @@ export default function TokushohoPage() {
     { label: "ホームページURL", value: "https://hsojapan.org/" },
     {
       label: "販売価格",
-      value: "各商品ページに記載の価格（税込）",
+      value: "税抜き¥1,200,000",
     },
     {
       label: "販売価格以外の必要料金",
-      value: "送料：全国一律【送料をご記入ください】円（税込）",
+      value: "お振込手数料はお客様のご負担となります",
     },
     {
       label: "支払方法",
-      value: "クレジットカード決済、銀行振込",
+      value: "銀行振込",
     },
     {
       label: "支払期限",
-      value: "クレジットカード：ご注文時に即時決済\n銀行振込：ご注文後7日以内",
+      value: "ご注文後7日以内",
     },
     {
       label: "商品引渡し時期",

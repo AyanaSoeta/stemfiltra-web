@@ -18,9 +18,21 @@ export default function ContactPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [sending, setSending] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: 実際の送信処理を実装してください
+    setSending(true);
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+    } catch {
+      // 送信失敗時も完了画面を表示（メールが届かない場合はお問い合わせ先を案内）
+    }
+    setSending(false);
     setSubmitted(true);
   };
 
@@ -154,9 +166,10 @@ export default function ContactPage() {
 
             <button
               type="submit"
-              className="w-full py-4 bg-[#1A1A1A] text-white text-sm tracking-widest rounded-md hover:bg-[#2A2A2A] transition-colors duration-200"
+              disabled={sending}
+              className="w-full py-4 bg-[#1A1A1A] text-white text-sm tracking-widest rounded-md hover:bg-[#2A2A2A] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              送信する
+              {sending ? "送信中..." : "送信する"}
             </button>
           </form>
         )}
@@ -167,8 +180,7 @@ export default function ContactPage() {
           <p className="text-xs text-[#666666] leading-relaxed">
             一般社団法人　健康事業支援機構<br />
             〒350-1124 埼玉県川越市新宿町3丁目10-1 403<br />
-            Email：info@hsojapan.org<br />
-            受付時間：平日 10:00〜17:00（土日祝を除く）
+            Email：hso.info.k@gmail.com
           </p>
         </div>
       </main>

@@ -725,8 +725,8 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 160px;
-  height: 160px;
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
   border: 1px solid rgba(160, 170, 200, 0.6);
   pointer-events: none;
@@ -735,8 +735,8 @@ body {
 }
 
 @keyframes heroPearlRipple {
-  0%   { transform: translate(-50%, -50%) scale(0.12); opacity: 0.72; }
-  100% { transform: translate(-50%, -50%) scale(1.88); opacity: 0;    }
+  0%   { transform: translate(-50%, -50%) scale(0.10); opacity: 0.72; }
+  100% { transform: translate(-50%, -50%) scale(2.0); opacity: 0;    }
 }
 
 /* ===== Hero Pearl — Colored Glow Particles (z-0) ===== */

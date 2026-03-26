@@ -17,18 +17,18 @@ const PREFECTURES = [
 ];
 
 // ─── 価格 ─────────────────────────────────────────────────────────────
-const PRICE_EX_TAX = 1_150_000;
+const PRICE_EX_TAX = 1_200_000;
 const TAX = Math.floor(PRICE_EX_TAX * 0.1);
 const PRICE_IN_TAX = PRICE_EX_TAX + TAX;
 const fmt = (n: number) => n.toLocaleString("ja-JP");
 
 // ─── 振込先情報 ───────────────────────────────────────────────────────
 const BANK_INFO = {
-  bankName: "三菱UFJ銀行",
-  branchName: "本店",
+  bankName: "三井住友銀行",
+  branchName: "小石川支店",
   accountType: "普通",
-  accountNumber: "0000000",
-  accountHolder: "イッパンシャダンホウジン ケンコウジギョウシエンキコウ",
+  accountNumber: "3764054",
+  accountHolder: "イツパンシヤダンホウジンケンコウジギヨウシエンキユウ",
 };
 
 // ─── ヤマト運輸クール宅急便 時間帯指定 ─────────────────────────────────
@@ -169,8 +169,15 @@ export default function PurchasePage() {
     setZipLoading(false);
   };
 
-  // バリデーション
-  const validate = (): boolean => {
+  // バリデーション（フィールド順序を保持）
+  const FIELD_ORDER = [
+    "lastName", "firstName", "lastNameKana", "firstNameKana",
+    "email", "emailConfirm", "phone",
+    "zipCode", "prefecture", "city", "address",
+    "counselingDay", "counselingTime", "agree",
+  ];
+
+  const validate = (): { valid: boolean; firstErrorField: string | null } => {
     const e: Errs = {};
     if (!form.lastName) e.lastName = "姓を入力してください";
     if (!form.firstName) e.firstName = "名を入力してください";
@@ -191,7 +198,15 @@ export default function PurchasePage() {
     if (!form.counselingTime) e.counselingTime = "ご希望の時間帯を選択してください";
     if (!agreed) e.agree = "同意が必要です";
     setErrors(e);
-    return Object.keys(e).length === 0;
+    const firstErrorField = FIELD_ORDER.find((key) => e[key as keyof typeof e]) ?? null;
+    return { valid: Object.keys(e).length === 0, firstErrorField };
+  };
+
+  const scrollToFirstError = (fieldName: string) => {
+    const el =
+      document.querySelector<HTMLElement>(`[name="${fieldName}"]`) ??
+      document.querySelector<HTMLElement>(`[data-field="${fieldName}"]`);
+    el?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   const scrollToTop = () => {
@@ -201,9 +216,9 @@ export default function PurchasePage() {
   // Step 1 → Step 2 (確認画面へ)
   const handleToConfirm = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate()) {
-      const firstErr = document.querySelector("[data-error]");
-      firstErr?.scrollIntoView({ behavior: "smooth", block: "center" });
+    const { valid, firstErrorField } = validate();
+    if (!valid) {
+      if (firstErrorField) scrollToFirstError(firstErrorField);
       return;
     }
     setCurrentStep(2);
@@ -217,13 +232,23 @@ export default function PurchasePage() {
   };
 
   // Step 2 → Step 3 (注文確定)
-  const handleConfirmOrder = () => {
-    // 注文番号を生成（実際はAPIで発行）
+  const handleConfirmOrder = async () => {
     const now = new Date();
     const num = `SF${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}-${String(Math.floor(Math.random() * 10000)).padStart(4, "0")}`;
     setOrderNumber(num);
     setCurrentStep(3);
     scrollToTop();
+
+    // バックグラウンドでメール送信（画面遷移はブロックしない）
+    try {
+      await fetch("/api/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, orderNumber: num }),
+      });
+    } catch {
+      // メール送信失敗は画面に影響させない
+    }
   };
 
   return (
@@ -362,6 +387,7 @@ export default function PurchasePage() {
                       onChange={handleChange} placeholder="太郎"
                       autoComplete="given-name"
                       className={inputCls(errors.firstName)}
+                      data-error={errors.firstName || undefined}
                     />
                   </Field>
                 </div>
@@ -373,6 +399,7 @@ export default function PurchasePage() {
                       type="text" name="lastNameKana" value={form.lastNameKana}
                       onChange={handleChange} placeholder="ヤマダ"
                       className={inputCls(errors.lastNameKana)}
+                      data-error={errors.lastNameKana || undefined}
                     />
                   </Field>
                   <Field label="メイ（フリガナ）" required error={errors.firstNameKana}>
@@ -380,6 +407,7 @@ export default function PurchasePage() {
                       type="text" name="firstNameKana" value={form.firstNameKana}
                       onChange={handleChange} placeholder="タロウ"
                       className={inputCls(errors.firstNameKana)}
+                      data-error={errors.firstNameKana || undefined}
                     />
                   </Field>
                 </div>
@@ -401,6 +429,7 @@ export default function PurchasePage() {
                     onChange={handleChange} placeholder="example@email.com"
                     autoComplete="off"
                     className={inputCls(errors.emailConfirm)}
+                    data-error={errors.emailConfirm || undefined}
                   />
                   <p className="text-white/25 text-[10px] mt-1">※ コピー&ペーストはご遠慮ください</p>
                 </Field>
@@ -694,7 +723,7 @@ export default function PurchasePage() {
               </FormCard>
 
               {/* ── 同意チェックボックス ── */}
-              <div>
+              <div data-field="agree">
                 <label className="flex items-start gap-3 cursor-pointer group">
                   <div className="relative mt-0.5 shrink-0">
                     <input
