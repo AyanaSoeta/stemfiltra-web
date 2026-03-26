@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-const NOTIFY_TO = "hso.info.k@gmail.com";
+const NOTIFY_TO = "hso.info.k@gmail.com, ayana.soeta@gmail.com";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
