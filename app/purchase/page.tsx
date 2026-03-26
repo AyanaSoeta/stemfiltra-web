@@ -64,6 +64,20 @@ function getDeliveryDateOptions(): { value: string; label: string }[] {
   return options;
 }
 
+// ─── カウンセリング希望曜日・時間帯 ──────────────────────────────────
+const COUNSELING_DAYS = [
+  { value: "weekday", label: "平日（月〜金）" },
+  { value: "weekend", label: "土日・祝日" },
+  { value: "any", label: "どちらでも可" },
+];
+
+const COUNSELING_TIMES = [
+  { value: "morning", label: "午前（10:00〜12:00）" },
+  { value: "afternoon", label: "午後（13:00〜17:00）" },
+  { value: "evening", label: "夕方以降（17:00〜20:00）" },
+  { value: "any", label: "どの時間帯でも可" },
+];
+
 // ─── フォーム型 ───────────────────────────────────────────────────────
 interface F {
   lastName: string; firstName: string;
@@ -73,6 +87,7 @@ interface F {
   zipCode: string; prefecture: string;
   city: string; address: string; building: string;
   deliveryDate: string; deliveryTime: string;
+  counselingDay: string; counselingTime: string;
   notes: string;
 }
 type Errs = Partial<Record<keyof F | "agree", string>>;
@@ -103,6 +118,7 @@ export default function PurchasePage() {
     zipCode: "", prefecture: "",
     city: "", address: "", building: "",
     deliveryDate: "", deliveryTime: "",
+    counselingDay: "", counselingTime: "",
     notes: "",
   });
   const [agreed, setAgreed] = useState(false);
@@ -171,6 +187,8 @@ export default function PurchasePage() {
     if (!form.prefecture) e.prefecture = "都道府県を選択してください";
     if (!form.city) e.city = "市区町村を入力してください";
     if (!form.address) e.address = "番地を入力してください";
+    if (!form.counselingDay) e.counselingDay = "ご希望の曜日を選択してください";
+    if (!form.counselingTime) e.counselingTime = "ご希望の時間帯を選択してください";
     if (!agreed) e.agree = "同意が必要です";
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -321,7 +339,7 @@ export default function PurchasePage() {
                 </div>
                 <p className="text-white/35 text-xs leading-relaxed pl-12">
                   ご注文確定後、振込先をご案内いたします。<br />
-                  お振込み確認後3〜7営業日以内に発送いたします。
+                  お振込み確認後、医師のカウンセリングを経て発送いたします。
                 </p>
               </div>
 
@@ -580,8 +598,93 @@ export default function PurchasePage() {
                 </div>
               </FormCard>
 
-              {/* ── Section 3: 備考（任意）── */}
-              <FormCard stepNum={3} title="備考・ご要望" optional>
+              {/* ── Section 3: カウンセリング希望 ── */}
+              <FormCard stepNum={3} title="オンラインカウンセリング">
+                <div
+                  className="flex items-start gap-3 rounded-xl px-4 py-3.5 mb-5 -mt-1"
+                  style={{
+                    background: "rgba(168,216,234,0.06)",
+                    border: "1px solid rgba(168,216,234,0.16)",
+                  }}
+                >
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                    style={{ background: "rgba(168,216,234,0.12)" }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A8D8EA" strokeWidth="1.5">
+                      <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-[#A8D8EA]/90 text-xs font-medium mb-1">提携医師による使用前カウンセリング（15〜20分）</p>
+                    <p className="text-white/35 text-[10px] leading-relaxed">
+                      お振込み確認後、提携美容クリニックの医師とリモートで面談いたします。使用方法のご説明・体質の確認・ご不明点のご相談を行います。カウンセリング費用は商品代金に含まれます。
+                    </p>
+                  </div>
+                </div>
+
+                <p className="text-white/50 text-xs mb-3">ご都合のよい曜日・時間帯をお選びください</p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                  <Field label="ご希望の曜日" required error={errors.counselingDay}>
+                    <div className="relative">
+                      <select
+                        name="counselingDay" value={form.counselingDay}
+                        onChange={handleChange}
+                        className={`appearance-none ${inputCls(errors.counselingDay)}`}
+                        style={{ colorScheme: "dark" }}
+                        data-error={errors.counselingDay || undefined}
+                      >
+                        <option value="" className="bg-[#1A1A1A] text-white/40">選択してください</option>
+                        {COUNSELING_DAYS.map((opt) => (
+                          <option key={opt.value} value={opt.value} className="bg-[#1A1A1A] text-white">
+                            {opt.label}
+                          </option>
+                        ))}
+                      </select>
+                      <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-white/30">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M6 9l6 6 6-6" />
+                        </svg>
+                      </div>
+                    </div>
+                  </Field>
+
+                  <Field label="ご希望の時間帯" required error={errors.counselingTime}>
+                    <div className="relative">
+                      <select
+                        name="counselingTime" value={form.counselingTime}
+                        onChange={handleChange}
+                        className={`appearance-none ${inputCls(errors.counselingTime)}`}
+                        style={{ colorScheme: "dark" }}
+                        data-error={errors.counselingTime || undefined}
+                      >
+                        <option value="" className="bg-[#1A1A1A] text-white/40">選択してください</option>
+                        {COUNSELING_TIMES.map((opt) => (
+                          <option key={opt.value} value={opt.value} className="bg-[#1A1A1A] text-white">
+                            {opt.label}
+                          </option>
+                        ))}
+                      </select>
+                      <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-white/30">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M6 9l6 6 6-6" />
+                        </svg>
+                      </div>
+                    </div>
+                  </Field>
+                </div>
+
+                <p className="text-white/20 text-[10px] leading-relaxed">
+                  ※ お振込み確認後、スタッフより具体的な日時をメールにてご連絡いたします。<br />
+                  ※ カウンセリングはオンライン（ビデオ通話）で実施いたします。
+                </p>
+              </FormCard>
+
+              {/* ── Section 4: 備考（任意）── */}
+              <FormCard stepNum={4} title="備考・ご要望" optional>
                 <textarea
                   name="notes" value={form.notes}
                   onChange={handleChange} rows={3}
@@ -727,6 +830,35 @@ export default function PurchasePage() {
               <ConfirmRow label="電話番号" value={form.phone} />
             </ConfirmSection>
 
+            {/* カウンセリング */}
+            <ConfirmSection title="オンラインカウンセリング">
+              <div className="flex items-center gap-3 mb-3">
+                <div
+                  className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
+                  style={{ background: "rgba(168,216,234,0.10)" }}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A8D8EA" strokeWidth="1.5">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-white text-sm font-medium">提携医師による使用前カウンセリング</p>
+                  <p className="text-white/35 text-xs mt-0.5">オンライン（15〜20分）・費用は商品代金に含む</p>
+                </div>
+              </div>
+              <ConfirmRow
+                label="ご希望曜日"
+                value={COUNSELING_DAYS.find((d) => d.value === form.counselingDay)?.label ?? form.counselingDay}
+              />
+              <ConfirmRow
+                label="ご希望時間帯"
+                value={COUNSELING_TIMES.find((t) => t.value === form.counselingTime)?.label ?? form.counselingTime}
+              />
+              <p className="text-white/25 text-[10px] mt-3">※ お振込み確認後、具体的な日時をメールにてご連絡いたします</p>
+            </ConfirmSection>
+
             {/* お届け先 */}
             <ConfirmSection title="お届け先住所・配送希望">
               <ConfirmRow label="郵便番号" value={form.zipCode} />
@@ -790,7 +922,8 @@ export default function PurchasePage() {
               <h1 className="text-white text-xl font-medium mb-2">ご注文ありがとうございます</h1>
               <p className="text-white/40 text-sm leading-relaxed">
                 ご注文内容の確認メールを <span className="text-[#A8D8EA]">{form.email}</span> に送信しました。<br />
-                下記の口座にお振込みをお願いいたします。
+                下記の口座にお振込みをお願いいたします。<br />
+                お振込み確認後、カウンセリング日時をメールにてご連絡いたします。
               </p>
               {orderNumber && (
                 <p className="text-white/25 text-xs mt-3">
@@ -873,13 +1006,52 @@ export default function PurchasePage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-[#A8D8EA] mt-0.5 shrink-0">●</span>
-                  <span>お振込み確認後、<strong className="text-white/60">3〜7営業日</strong>以内にクール冷蔵便にて発送いたします。</span>
+                  <span>お振込み確認後、<strong className="text-white/60">1〜2営業日以内</strong>にカウンセリング日時の確定をメールにてご連絡いたします。</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[#A8D8EA] mt-0.5 shrink-0">●</span>
+                  <span>カウンセリング完了後、<strong className="text-white/60">3〜7営業日</strong>以内にクール冷蔵便にて発送いたします。</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-[#A8D8EA] mt-0.5 shrink-0">●</span>
                   <span>発送完了後、追跡番号を記載したメールをお送りいたします。</span>
                 </li>
               </ul>
+            </div>
+
+            {/* 今後の流れ */}
+            <div
+              className="rounded-2xl p-5 space-y-3"
+              style={{
+                background: "rgba(168,216,234,0.03)",
+                border: "1px solid rgba(168,216,234,0.12)",
+              }}
+            >
+              <p className="text-[#A8D8EA]/80 text-xs font-medium tracking-wider flex items-center gap-2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <path d="M16 2v4M8 2v4M3 10h18" />
+                </svg>
+                今後の流れ
+              </p>
+              <div className="space-y-3 pl-1">
+                {[
+                  { num: "1", text: "お振込み（7日以内にお願いいたします）", done: false },
+                  { num: "2", text: "入金確認後、カウンセリング日時をメールでご連絡", done: false },
+                  { num: "3", text: "提携医師とのオンラインカウンセリング（15〜20分）", done: false },
+                  { num: "4", text: "カウンセリング完了後、商品を発送", done: false },
+                ].map((item) => (
+                  <div key={item.num} className="flex items-start gap-3">
+                    <span
+                      className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5"
+                      style={{ background: "rgba(168,216,234,0.15)", color: "#A8D8EA" }}
+                    >
+                      {item.num}
+                    </span>
+                    <span className="text-white/50 text-xs leading-relaxed">{item.text}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* お問い合わせ */}
@@ -945,7 +1117,7 @@ export default function PurchasePage() {
             ))}
           </nav>
           <p className="text-white/20 text-xs">
-            © 2025 Health Support Organization. All rights reserved.
+            © 2025 一般社団法人　健康事業支援機構. All rights reserved.
           </p>
         </div>
       </footer>

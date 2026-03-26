@@ -49,7 +49,7 @@ const sections = [
   {
     title: "9. お問い合わせ",
     content:
-      "個人情報の取り扱いに関するお問い合わせは、下記までご連絡ください。\n\n一般社団法人健康事業支援機構（HSO）\n〒112-0002 東京都文京区小石川1丁目28-3 TN小石川ビル 2階 NIS\nEmail：【メールアドレスをご記入ください】",
+      "個人情報の取り扱いに関するお問い合わせは、下記までご連絡ください。\n\n一般社団法人　健康事業支援機構\n〒350-1124 埼玉県川越市新宿町3丁目10-1 403\nEmail：info@hsojapan.org",
   },
 ];
 
@@ -124,7 +124,7 @@ export default function PrivacyPolicyPage() {
             </Link>
           </nav>
           <p className="text-white/30 text-xs">
-            © 2025 Health Support Organization. All rights reserved.
+            © 2025 一般社団法人　健康事業支援機構. All rights reserved.
           </p>
         </div>
       </footer>

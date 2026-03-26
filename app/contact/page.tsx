@@ -165,9 +165,9 @@ export default function ContactPage() {
         <div className="mt-10 p-6 bg-white/60 rounded-lg border border-gray-100">
           <p className="text-xs font-medium text-[#1A1A1A] mb-3">お問い合わせ先</p>
           <p className="text-xs text-[#666666] leading-relaxed">
-            一般社団法人健康事業支援機構（HSO）<br />
-            〒112-0002 東京都文京区小石川1丁目28-3 TN小石川ビル 2階 NIS<br />
-            Email：【メールアドレスをご記入ください】<br />
+            一般社団法人　健康事業支援機構<br />
+            〒350-1124 埼玉県川越市新宿町3丁目10-1 403<br />
+            Email：info@hsojapan.org<br />
             受付時間：平日 10:00〜17:00（土日祝を除く）
           </p>
         </div>
@@ -194,7 +194,7 @@ export default function ContactPage() {
             </Link>
           </nav>
           <p className="text-white/30 text-xs">
-            © 2025 Health Support Organization. All rights reserved.
+            © 2025 一般社団法人　健康事業支援機構. All rights reserved.
           </p>
         </div>
       </footer>

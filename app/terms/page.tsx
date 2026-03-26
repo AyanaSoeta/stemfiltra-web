@@ -124,7 +124,7 @@ export default function TermsPage() {
             </Link>
           </nav>
           <p className="text-white/30 text-xs">
-            © 2025 Health Support Organization. All rights reserved.
+            © 2025 一般社団法人　健康事業支援機構. All rights reserved.
           </p>
         </div>
       </footer>

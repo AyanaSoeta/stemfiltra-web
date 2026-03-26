@@ -805,7 +805,7 @@ export default function Home() {
               最新のエイジングケアを体験する
             </Link>
             <p className="text-xs text-white/40 mt-4">
-              送料無料・専門スタッフがサポート
+              送料無料・医師のカウンセリング付き
             </p>
           </div>
 
@@ -814,13 +814,157 @@ export default function Home() {
             className="flex flex-wrap justify-center gap-3 mt-10 fade-in"
             style={{ transitionDelay: "0.8s" }}
           >
-            {["医学博士開発", "国内CPC製造", "0.22μm濾過滅菌"].map((badge) => (
+            {["医学博士開発", "国内CPC製造", "医師カウンセリング付"].map((badge) => (
               <span
                 key={badge}
                 className="text-xs text-white/35 border border-white/15 rounded-full px-4 py-1"
               >
                 {badge}
               </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== 9.5 ご購入からご使用までの流れ ==================== */}
+      <section className="py-20 md:py-32" style={{ background: "#0D0D0D" }}>
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="font-serif-jp text-2xl md:text-3xl lg:text-4xl text-white text-center mb-4 fade-in">
+            ご購入からご使用までの流れ
+          </h2>
+          <p className="text-white/40 text-sm text-center mb-16 fade-in fade-in-delay-1">
+            医師のカウンセリングを経て、安心してお使いいただけます
+          </p>
+
+          <div className="relative fade-in fade-in-delay-2">
+            {/* 縦のタイムライン */}
+            <div
+              className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px md:-translate-x-1/2"
+              style={{ background: "linear-gradient(to bottom, rgba(168,216,234,0.4), rgba(168,216,234,0.08))" }}
+            />
+
+            {[
+              {
+                step: "STEP 1",
+                title: "ご注文・お支払い",
+                desc: "サイトからご注文後、銀行振込にてお支払い。カウンセリングのご希望日時もこの時にお伺いします。",
+                icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A8D8EA" strokeWidth="1.5">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="M2 10h20" />
+                  </svg>
+                ),
+              },
+              {
+                step: "STEP 2",
+                title: "ご入金確認",
+                desc: "お振込みを確認後、1〜2営業日以内にメールにてカウンセリング日時の確定をご連絡いたします。",
+                icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A8D8EA" strokeWidth="1.5">
+                    <path d="M9 12l2 2 4-4" />
+                    <circle cx="12" cy="12" r="10" />
+                  </svg>
+                ),
+              },
+              {
+                step: "STEP 3",
+                title: "医師とのオンラインカウンセリング",
+                desc: "提携美容クリニックの医師と15〜20分のリモート面談。使用方法のご説明、体質・アレルギーの確認、ご不明点のご相談を行います。",
+                icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A8D8EA" strokeWidth="1.5">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                  </svg>
+                ),
+                highlight: true,
+              },
+              {
+                step: "STEP 4",
+                title: "商品発送",
+                desc: "カウンセリング完了後、ヤマト運輸クール宅急便にて発送。追跡番号をメールでお知らせいたします。",
+                icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A8D8EA" strokeWidth="1.5">
+                    <rect x="1" y="3" width="15" height="13" rx="2" />
+                    <path d="M16 8h4l3 3v5h-7V8z" />
+                    <circle cx="5.5" cy="18.5" r="2.5" />
+                    <circle cx="18.5" cy="18.5" r="2.5" />
+                  </svg>
+                ),
+              },
+              {
+                step: "STEP 5",
+                title: "ご使用開始",
+                desc: "医師のアドバイスに基づき、安心してご使用いただけます。ご不明点はいつでも専門スタッフがサポートいたします。",
+                icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A8D8EA" strokeWidth="1.5">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                ),
+              },
+            ].map((item, i) => (
+              <div
+                key={item.step}
+                className={`relative flex items-start mb-12 last:mb-0 ${
+                  i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                }`}
+              >
+                {/* ドット */}
+                <div
+                  className="absolute left-6 md:left-1/2 w-3 h-3 rounded-full md:-translate-x-1/2 -translate-x-1/2 mt-5 z-10"
+                  style={{
+                    background: item.highlight ? "#A8D8EA" : "rgba(168,216,234,0.5)",
+                    boxShadow: item.highlight ? "0 0 12px rgba(168,216,234,0.6)" : "none",
+                  }}
+                />
+
+                {/* カード */}
+                <div className={`ml-14 md:ml-0 md:w-[calc(50%-40px)] ${i % 2 === 0 ? "md:mr-auto md:pr-0" : "md:ml-auto md:pl-0"}`}>
+                  <div
+                    className="rounded-2xl p-5 md:p-6"
+                    style={{
+                      background: item.highlight
+                        ? "rgba(168,216,234,0.06)"
+                        : "rgba(255,255,255,0.03)",
+                      border: item.highlight
+                        ? "1px solid rgba(168,216,234,0.25)"
+                        : "1px solid rgba(255,255,255,0.07)",
+                    }}
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div
+                        className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+                        style={{
+                          background: item.highlight
+                            ? "rgba(168,216,234,0.15)"
+                            : "rgba(168,216,234,0.08)",
+                        }}
+                      >
+                        {item.icon}
+                      </div>
+                      <div>
+                        <p className="text-[#A8D8EA] text-[10px] tracking-[0.2em] font-medium">{item.step}</p>
+                        <p className="text-white text-sm font-medium">{item.title}</p>
+                      </div>
+                    </div>
+                    <p className="text-white/40 text-xs leading-relaxed pl-[52px]">{item.desc}</p>
+                    {item.highlight && (
+                      <div
+                        className="mt-3 ml-[52px] rounded-lg px-3 py-2 inline-flex items-center gap-2"
+                        style={{
+                          background: "rgba(168,216,234,0.08)",
+                          border: "1px solid rgba(168,216,234,0.15)",
+                        }}
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#A8D8EA" strokeWidth="2">
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                        <span className="text-[#A8D8EA]/80 text-[10px]">カウンセリング費用は商品代金に含まれます</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -966,10 +1110,10 @@ export default function Home() {
       <footer className="py-12 md:py-16 bg-[#111111]">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <p className="text-white text-base mb-2">
-            一般社団法人健康事業支援機構（HSO）
+            一般社団法人　健康事業支援機構
           </p>
           <p className="text-white/50 text-xs md:text-sm mb-8">
-            〒112-0002 東京都文京区小石川1丁目28-3 TN小石川ビル 2階 NIS
+            〒350-1124 埼玉県川越市新宿町3丁目10-1 403
           </p>
           <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2 mb-8">
             <Link href="/tokushoho" className="text-white/50 text-xs hover:text-white/80 transition-colors duration-200">
@@ -997,7 +1141,7 @@ export default function Home() {
           </div>
 
           <p className="text-white/30 text-xs">
-            © 2025 Health Support Organization. All rights reserved.
+            © 2025 一般社団法人　健康事業支援機構. All rights reserved.
           </p>
         </div>
       </footer>

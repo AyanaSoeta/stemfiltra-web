@@ -7,18 +7,18 @@ export const metadata: Metadata = {
 
 export default function TokushohoPage() {
   const items = [
-    { label: "販売業者", value: "一般社団法人健康事業支援機構（HSO）" },
-    { label: "代表者名", value: "【代表者名をご記入ください】" },
+    { label: "販売業者", value: "一般社団法人　健康事業支援機構" },
+    { label: "代表者名", value: "手代木秀一" },
     {
       label: "所在地",
-      value: "〒112-0002 東京都文京区小石川1丁目28-3 TN小石川ビル 2階 NIS",
+      value: "〒350-1124 埼玉県川越市新宿町3丁目10-1 403",
     },
-    { label: "電話番号", value: "【電話番号をご記入ください】" },
+    { label: "電話番号", value: "03-5805-0258" },
     {
       label: "メールアドレス",
-      value: "【メールアドレスをご記入ください】",
+      value: "info@hsojapan.org",
     },
-    { label: "ホームページURL", value: "【URLをご記入ください】" },
+    { label: "ホームページURL", value: "https://hsojapan.org/" },
     {
       label: "販売価格",
       value: "各商品ページに記載の価格（税込）",
@@ -123,7 +123,7 @@ export default function TokushohoPage() {
             </Link>
           </nav>
           <p className="text-white/30 text-xs">
-            © 2025 Health Support Organization. All rights reserved.
+            © 2025 一般社団法人　健康事業支援機構. All rights reserved.
           </p>
         </div>
       </footer>
