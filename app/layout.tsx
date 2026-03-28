@@ -39,10 +39,63 @@ const zenKakuGothicNew = Zen_Kaku_Gothic_New({
   preload: false,
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://stemfiltra.com";
+
 export const metadata: Metadata = {
-  title: "Stem Filtra Activation | 幹細胞由来エクソソーム濾液",
+  title: {
+    default: "Stem Filtra Activation | 幹細胞由来エクソソーム濾液",
+    template: "%s | Stem Filtra Activation",
+  },
   description:
-    "幹細胞由来エクソソーム濾液を使用した次世代エイジングケア。本製品は医薬品ではありません。",
+    "幹細胞由来エクソソーム濾液を使用した次世代エイジングケア。国内CPC施設で精製された高純度エクソソーム濾液を経鼻吸収で届ける新発想のエイジングケア製品です。本製品は医薬品ではありません。",
+  metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "ja_JP",
+    siteName: "Stem Filtra Activation",
+    title: "Stem Filtra Activation | 幹細胞由来エクソソーム濾液",
+    description:
+      "国内CPC施設で精製された高純度エクソソーム濾液を経鼻吸収で届ける新発想のエイジングケア製品。",
+    images: [
+      {
+        url: "/images/product-package.png",
+        width: 1200,
+        height: 630,
+        alt: "Stem Filtra Activation 製品パッケージ",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Stem Filtra Activation | 幹細胞由来エクソソーム濾液",
+    description:
+      "国内CPC施設で精製された高純度エクソソーム濾液を経鼻吸収で届ける新発想のエイジングケア製品。",
+    images: ["/images/product-package.png"],
+  },
+  keywords: [
+    "エクソソーム",
+    "幹細胞",
+    "エクソソーム濾液",
+    "エイジングケア",
+    "経鼻吸収",
+    "Stem Filtra Activation",
+    "幹細胞由来",
+    "エクソソーム 美容",
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -52,6 +105,31 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              name: "Stem Filtra Activation",
+              description:
+                "幹細胞由来エクソソーム濾液を使用した次世代エイジングケア製品。国内CPC施設にて精製。",
+              brand: {
+                "@type": "Brand",
+                name: "Stem Filtra Activation",
+              },
+              manufacturer: {
+                "@type": "Organization",
+                name: "一般社団法人 健康事業支援機構",
+              },
+              category: "エイジングケア",
+              image: `${siteUrl}/images/product-package.png`,
+              url: siteUrl,
+            }),
+          }}
+        />
+      </head>
       <body className={`${notoSansJP.variable} ${notoSerifJP.variable} ${shipporiMincho.variable} ${zenKakuGothicNew.variable}`}>
         {/* ── 薬機法表記バー：全ページ共通ヘッダー ── */}
         <div

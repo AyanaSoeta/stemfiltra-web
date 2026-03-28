@@ -11,7 +11,9 @@
       "mcp__plugin_playwright_playwright__browser_close",
       "Bash(npx next:*)",
       "Bash(npm run:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(grep -r \"meta\\\\|og:\\\\|twitter:\\\\|structured\\\\|schema\" /c/Users/ayana/Repos/exosome-lp/app/*.tsx)",
+      "Bash(cat C:/Users/ayana/Repos/exosome-lp/.env*)"
     ]
   }
 }

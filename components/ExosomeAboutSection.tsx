@@ -279,10 +279,7 @@ function ContentCard() {
       <motion.div variants={item}>
         <div className="border-t border-white/10 pt-6">
           <p className="font-zen text-xs text-white/40 leading-relaxed">
-            * ヒト脂肪由来間葉系細胞エクソソーム（整肌成分）
-          </p>
-          <p className="font-zen text-xs text-white/40 leading-relaxed">
-            * 角質層まで
+            *幹細胞濾液賦活剤
           </p>
         </div>
       </motion.div>

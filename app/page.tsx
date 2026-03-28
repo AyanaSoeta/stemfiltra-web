@@ -76,8 +76,8 @@ export default function Home() {
           <p className="font-serif-jp text-2xl md:text-3xl lg:text-4xl text-[#333] leading-relaxed mb-8 fade-in">
             「飲む」から「吸う」エイジングケア。
           </p>
-          <p className="font-serif-jp text-2xl md:text-3xl lg:text-4xl text-[#333] leading-relaxed mb-12 fade-in fade-in-delay-1">
-            美しさは呼吸をするように取り入れる時代へ。
+          <p className="font-serif-jp text-2xl md:text-3xl lg:text-4xl text-[#333] leading-relaxed mb-12 fade-in fade-in-delay-1 whitespace-nowrap">
+            美しさは呼吸をするように<br className="md:hidden" />取り入れる時代へ。
           </p>
           <p className="text-base md:text-lg tracking-[0.3em] text-[#8A8A8A] fade-in fade-in-delay-2">
             Stem Filtra Activation
@@ -109,14 +109,14 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <p className="font-serif-jp text-lg md:text-xl lg:text-2xl text-[#A8D8EA] text-center leading-relaxed fade-in">
-            そのお悩み、成分が「必要な場所に届いていない」ことが一因かもしれません。
+          <p className="font-serif-jp text-[3.6vw] sm:text-lg md:text-xl lg:text-2xl text-[#A8D8EA] text-center leading-relaxed fade-in whitespace-nowrap">
+            そのお悩み、成分が「必要な場所に届いていない」<br />ことが一因かもしれません。
           </p>
         </div>
       </section>
 
       {/* ==================== 4. Solution Section ==================== */}
-      <section className="relative py-20 md:py-32 bg-white science-lines overflow-hidden">
+      <section className="relative py-20 md:py-32 bg-white overflow-hidden">
         {/* Sparkle particles */}
         <div className="sparkle-field sparkle-field-a" />
         <div className="sparkle-field sparkle-field-b" />
@@ -719,7 +719,7 @@ export default function Home() {
               className="font-serif-jp text-3xl md:text-5xl text-white font-bold"
               style={{ letterSpacing: "0.15em" }}
             >
-              届かなければ、意味がない。
+              届かなければ、<br className="md:hidden" />意味がない。
             </h2>
             <div className="w-20 h-px bg-[#A8D8EA] mx-auto mt-6" />
           </div>
@@ -727,13 +727,13 @@ export default function Home() {
           {/* ② サブコピー（説明文） - 各行0.2秒ずつ遅延フェードイン */}
           <div className="text-center mb-14 md:mb-16">
             <p className="text-sm md:text-base text-white/75 leading-[2.0] fade-in fade-in-delay-1">
-              医学博士の着想から生まれた「鼻から届ける」新発想。
+              医学博士の着想から生まれた<br className="md:hidden" />「鼻から届ける」新発想。
             </p>
             <p className="text-sm md:text-base text-white/75 leading-[2.0] fade-in fade-in-delay-2">
-              凍結融解、0.22μm濾過滅菌——一切の妥協なき精製を経て、
+              凍結融解、0.22μm濾過滅菌——<br className="md:hidden" />一切の妥協なき精製を経て、
             </p>
             <p className="text-sm md:text-base text-white/75 leading-[2.0] fade-in fade-in-delay-3">
-              一滴に凝縮された成分が、あなたの手元へ届きます。
+              一滴に凝縮された成分が、<br className="md:hidden" />あなたの手元へ届きます。
             </p>
           </div>
 
@@ -835,7 +835,7 @@ export default function Home() {
             ご購入からご使用までの流れ
           </h2>
           <p className="text-white/40 text-sm text-center mb-16 fade-in fade-in-delay-1">
-            医師のカウンセリングを経て、安心してお使いいただけます
+            医師のカウンセリングを経て、<br className="md:hidden" />安心してお使いいただけます
           </p>
 
           <div className="relative fade-in fade-in-delay-2">
@@ -1078,7 +1078,7 @@ export default function Home() {
             </div>
           </div>
           <p className="font-serif-jp text-2xl md:text-3xl lg:text-4xl text-white mb-10 leading-relaxed fade-in fade-in-delay-1">
-            あなたのエイジングケアを、今日から。
+            あなたのエイジングケアを、<br className="md:hidden" />今日から。
           </p>
           <div className="fade-in fade-in-delay-2">
             <Link

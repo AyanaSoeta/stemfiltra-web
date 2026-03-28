@@ -280,10 +280,10 @@ export default function HeroSection() {
               className="hero-animate-in mb-5 md:mb-14"
               style={{ animationDelay: "0.3s" }}
             >
-              <h1 className="font-shippori text-[1.7rem] leading-[1.5] md:text-[2.75rem] lg:text-[3.4rem] text-[#2d2d2d] tracking-wide">
+              <h1 className="font-shippori text-[2.2rem] leading-[1.5] md:text-[3.2rem] lg:text-[4rem] text-[#2d2d2d] tracking-wide">
                 脳からめぐる
               </h1>
-              <h1 className="font-shippori text-[1.7rem] leading-[1.5] md:text-[2.75rem] lg:text-[3.4rem] text-[#2d2d2d] tracking-wide">
+              <h1 className="font-shippori text-[2.2rem] leading-[1.5] md:text-[3.2rem] lg:text-[4rem] text-[#2d2d2d] tracking-wide">
                 エクソソームの真価
               </h1>
             </div>
@@ -303,8 +303,8 @@ export default function HeroSection() {
                 className="flex items-center justify-center md:justify-start gap-3 mt-3 md:mt-4"
                 style={{ opacity: 0.45 }}
               >
-                <span className="flex items-center gap-1 text-[10px] tracking-[0.12em] text-[#2d2d2d]">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <span className="flex items-center gap-1 text-[10px] md:text-[13px] tracking-[0.12em] text-[#2d2d2d]">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="md:w-[13px] md:h-[13px]">
                     <line x1="12" y1="2" x2="12" y2="22" />
                     <line x1="2" y1="12" x2="22" y2="12" />
                     <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
@@ -312,10 +312,10 @@ export default function HeroSection() {
                   </svg>
                   クール冷蔵配送
                 </span>
-                <span className="text-[#2d2d2d]/40 text-[10px]">·</span>
-                <span className="text-[10px] tracking-[0.12em] text-[#2d2d2d]">送料無料</span>
-                <span className="text-[#2d2d2d]/40 text-[10px]">·</span>
-                <span className="text-[10px] tracking-[0.12em] text-[#2d2d2d]">正規品保証</span>
+                <span className="text-[#2d2d2d]/40 text-[10px] md:text-[13px]">·</span>
+                <span className="text-[10px] md:text-[13px] tracking-[0.12em] text-[#2d2d2d]">送料無料</span>
+                <span className="text-[#2d2d2d]/40 text-[10px] md:text-[13px]">·</span>
+                <span className="text-[10px] md:text-[13px] tracking-[0.12em] text-[#2d2d2d]">正規品保証</span>
               </div>
             </div>
           </div>

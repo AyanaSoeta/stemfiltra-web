@@ -1347,12 +1347,12 @@ function BankRow({ label, value, copyable }: { label: string; value: string; cop
 
   return (
     <div
-      className="flex items-center justify-between px-0 py-3"
+      className="flex items-start justify-between px-0 py-3"
       style={{ borderBottom: "1px solid rgba(168,216,234,0.08)" }}
     >
-      <span className="text-white/40 text-xs w-20 shrink-0">{label}</span>
-      <div className="flex items-center gap-2 flex-1 min-w-0 justify-end">
-        <span className="text-white text-sm font-medium truncate">{value}</span>
+      <span className="text-white/40 text-xs w-20 shrink-0 pt-0.5">{label}</span>
+      <div className="flex items-start gap-2 flex-1 min-w-0 justify-end">
+        <span className="text-white text-sm font-medium text-right break-all">{value}</span>
         {copyable && (
           <button
             type="button"

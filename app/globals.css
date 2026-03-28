@@ -731,6 +731,8 @@ body {
   border: 1px solid rgba(160, 170, 200, 0.6);
   pointer-events: none;
   will-change: transform, opacity;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.10);
   animation: heroPearlRipple 3.8s ease-out infinite;
 }
 
