@@ -17,10 +17,20 @@ const PREFECTURES = [
 ];
 
 // ─── 価格 ─────────────────────────────────────────────────────────────
-const PRICE_EX_TAX = 1_200_000;
-const TAX = Math.floor(PRICE_EX_TAX * 0.1);
-const PRICE_IN_TAX = PRICE_EX_TAX + TAX;
+const BASE_PRICE_EX_TAX = 1_200_000;
 const fmt = (n: number) => n.toLocaleString("ja-JP");
+
+// ─── クーポン定義 ─────────────────────────────────────────────────────
+interface Coupon {
+  discount: number; // 税抜価格からの割引額
+}
+const COUPONS: Record<string, Coupon> = {
+  kamuromi: { discount: 300_000 },
+};
+
+function lookupCoupon(code: string): Coupon | null {
+  return COUPONS[code.toLowerCase().trim()] ?? null;
+}
 
 // ─── 振込先情報 ───────────────────────────────────────────────────────
 const BANK_INFO = {
@@ -127,6 +137,39 @@ export default function PurchasePage() {
   const [zipMsg, setZipMsg] = useState<{ type: "error" | "ok"; text: string } | null>(null);
   const [orderNumber, setOrderNumber] = useState("");
   const topRef = useRef<HTMLDivElement>(null);
+
+  // クーポン
+  const [couponCode, setCouponCode] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; discount: number } | null>(null);
+  const [couponMsg, setCouponMsg] = useState<{ type: "ok" | "error"; text: string } | null>(null);
+
+  // 価格計算
+  const discount = appliedCoupon?.discount ?? 0;
+  const PRICE_EX_TAX = BASE_PRICE_EX_TAX - discount;
+  const TAX = Math.floor(PRICE_EX_TAX * 0.1);
+  const PRICE_IN_TAX = PRICE_EX_TAX + TAX;
+
+  const handleApplyCoupon = () => {
+    const code = couponCode.trim();
+    if (!code) {
+      setCouponMsg({ type: "error", text: "クーポンコードを入力してください" });
+      return;
+    }
+    const coupon = lookupCoupon(code);
+    if (coupon) {
+      setAppliedCoupon({ code, discount: coupon.discount });
+      setCouponMsg({ type: "ok", text: `クーポン適用: ¥${fmt(coupon.discount)}割引` });
+    } else {
+      setCouponMsg({ type: "error", text: "無効なクーポンコードです" });
+      setAppliedCoupon(null);
+    }
+  };
+
+  const handleRemoveCoupon = () => {
+    setAppliedCoupon(null);
+    setCouponCode("");
+    setCouponMsg(null);
+  };
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -244,7 +287,12 @@ export default function PurchasePage() {
       await fetch("/api/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, orderNumber: num }),
+        body: JSON.stringify({
+          ...form,
+          orderNumber: num,
+          couponCode: appliedCoupon?.code ?? "",
+          discount,
+        }),
       });
     } catch {
       // メール送信失敗は画面に影響させない
@@ -334,7 +382,18 @@ export default function PurchasePage() {
         {currentStep === 1 && (
           <div className="grid md:grid-cols-[1fr_1.15fr] gap-8 lg:gap-12 items-start">
             {/* ════ 左：商品サマリー（スティッキー）════ */}
-            <ProductSummary />
+            <ProductSummary
+              priceExTax={PRICE_EX_TAX}
+              tax={TAX}
+              priceInTax={PRICE_IN_TAX}
+              discount={discount}
+              couponCode={couponCode}
+              onCouponCodeChange={setCouponCode}
+              onApplyCoupon={handleApplyCoupon}
+              onRemoveCoupon={handleRemoveCoupon}
+              appliedCoupon={appliedCoupon}
+              couponMsg={couponMsg}
+            />
 
             {/* ════ 右：注文フォーム ════ */}
             <form onSubmit={handleToConfirm} noValidate className="space-y-5">
@@ -818,18 +877,24 @@ export default function PurchasePage() {
                 className="mt-4 pt-3 space-y-1.5"
                 style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
               >
-                {[
-                  { label: "本体価格", val: `¥${fmt(PRICE_EX_TAX)}` },
-                  { label: "消費税（10%）", val: `¥${fmt(TAX)}` },
-                  { label: "送料（クール冷蔵便）", val: "無料", accent: true },
-                ].map((row) => (
-                  <div key={row.label} className="flex justify-between items-center">
-                    <span className="text-white/40 text-xs">{row.label}</span>
-                    <span className={`text-xs ${row.accent ? "text-[#A8D8EA]" : "text-white/60"}`}>
-                      {row.val}
-                    </span>
+                <div className="flex justify-between items-center">
+                  <span className="text-white/40 text-xs">本体価格</span>
+                  <span className="text-white/60 text-xs">¥{fmt(BASE_PRICE_EX_TAX)}</span>
+                </div>
+                {discount > 0 && (
+                  <div className="flex justify-between items-center">
+                    <span className="text-emerald-400/80 text-xs">クーポン割引</span>
+                    <span className="text-emerald-400 text-xs">-¥{fmt(discount)}</span>
                   </div>
-                ))}
+                )}
+                <div className="flex justify-between items-center">
+                  <span className="text-white/40 text-xs">消費税（10%）</span>
+                  <span className="text-white/60 text-xs">¥{fmt(TAX)}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-white/40 text-xs">送料（クール冷蔵便）</span>
+                  <span className="text-[#A8D8EA] text-xs">無料</span>
+                </div>
               </div>
             </ConfirmSection>
 
@@ -1155,7 +1220,29 @@ export default function PurchasePage() {
 }
 
 // ─── 商品サマリーコンポーネント ──────────────────────────────────────────
-function ProductSummary() {
+function ProductSummary({
+  priceExTax,
+  tax,
+  priceInTax,
+  discount,
+  couponCode,
+  onCouponCodeChange,
+  onApplyCoupon,
+  onRemoveCoupon,
+  appliedCoupon,
+  couponMsg,
+}: {
+  priceExTax: number;
+  tax: number;
+  priceInTax: number;
+  discount: number;
+  couponCode: string;
+  onCouponCodeChange: (v: string) => void;
+  onApplyCoupon: () => void;
+  onRemoveCoupon: () => void;
+  appliedCoupon: { code: string; discount: number } | null;
+  couponMsg: { type: "ok" | "error"; text: string } | null;
+}) {
   return (
     <div className="md:sticky md:top-24 space-y-4">
       {/* 商品カード */}
@@ -1203,25 +1290,96 @@ function ProductSummary() {
             className="rounded-xl p-4 space-y-2.5"
             style={{ background: "rgba(0,0,0,0.3)" }}
           >
-            {[
-              { label: "本体価格", val: `¥${fmt(PRICE_EX_TAX)}` },
-              { label: "消費税（10%）", val: `¥${fmt(TAX)}` },
-              { label: "送料（クール冷蔵便）", val: "無料", accent: true },
-            ].map((row) => (
-              <div key={row.label} className="flex justify-between items-center">
-                <span className="text-white/45 text-xs">{row.label}</span>
-                <span className={`text-xs ${row.accent ? "text-[#A8D8EA]" : "text-white/80"}`}>
-                  {row.val}
-                </span>
+            <div className="flex justify-between items-center">
+              <span className="text-white/45 text-xs">本体価格</span>
+              <span className="text-white/80 text-xs">¥{fmt(BASE_PRICE_EX_TAX)}</span>
+            </div>
+            {discount > 0 && (
+              <div className="flex justify-between items-center">
+                <span className="text-emerald-400/80 text-xs">クーポン割引</span>
+                <span className="text-emerald-400 text-xs">-¥{fmt(discount)}</span>
               </div>
-            ))}
+            )}
+            <div className="flex justify-between items-center">
+              <span className="text-white/45 text-xs">消費税（10%）</span>
+              <span className="text-white/80 text-xs">¥{fmt(tax)}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-white/45 text-xs">送料（クール冷蔵便）</span>
+              <span className="text-[#A8D8EA] text-xs">無料</span>
+            </div>
             <div
               className="flex justify-between items-center pt-2.5 mt-0.5"
               style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
             >
               <span className="text-white text-sm font-medium">合計（税込）</span>
-              <span className="text-white text-lg font-bold">¥{fmt(PRICE_IN_TAX)}</span>
+              <span className="text-white text-lg font-bold">¥{fmt(priceInTax)}</span>
             </div>
+          </div>
+
+          {/* クーポンコード入力 */}
+          <div
+            className="mt-4 rounded-xl p-4"
+            style={{
+              background: "rgba(255,255,255,0.02)",
+              border: "1px solid rgba(255,255,255,0.08)",
+            }}
+          >
+            <p className="text-white/50 text-xs font-medium mb-2.5">クーポンコード</p>
+            {appliedCoupon ? (
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2">
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                  <span className="text-emerald-400 text-xs font-medium truncate">{appliedCoupon.code}</span>
+                  <span className="text-emerald-400/60 text-[10px]">(-¥{fmt(appliedCoupon.discount)})</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={onRemoveCoupon}
+                  className="shrink-0 text-white/30 text-[10px] hover:text-white/60 transition-colors"
+                >
+                  取消
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={couponCode}
+                    onChange={(e) => onCouponCodeChange(e.target.value)}
+                    placeholder="コードを入力"
+                    className="flex-1 rounded-lg px-3 py-2.5 text-xs text-white placeholder:text-white/20 bg-white/[0.06] border border-white/[0.10] focus:border-[#A8D8EA] focus:bg-white/[0.08] focus:outline-none transition-all duration-200"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        onApplyCoupon();
+                      }
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={onApplyCoupon}
+                    className="shrink-0 px-3.5 py-2.5 rounded-lg text-xs font-medium text-[#0A0A0A] transition-all duration-200 hover:opacity-85 active:scale-95"
+                    style={{ background: "#A8D8EA" }}
+                  >
+                    適用
+                  </button>
+                </div>
+                {couponMsg && (
+                  <p className={`text-xs mt-2 flex items-center gap-1 ${couponMsg.type === "ok" ? "text-emerald-400" : "text-red-400"}`}>
+                    {couponMsg.type === "ok" && (
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M20 6L9 17l-5-5" />
+                      </svg>
+                    )}
+                    {couponMsg.text}
+                  </p>
+                )}
+              </>
+            )}
           </div>
 
           {/* お支払い方法 */}

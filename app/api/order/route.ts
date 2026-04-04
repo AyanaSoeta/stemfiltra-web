@@ -2,9 +2,7 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
 const NOTIFY_TO = "hso.info.k@gmail.com";
-const PRICE_EX_TAX = 1_200_000;
-const TAX = Math.floor(PRICE_EX_TAX * 0.1);
-const PRICE_IN_TAX = PRICE_EX_TAX + TAX;
+const BASE_PRICE_EX_TAX = 1_200_000;
 const fmt = (n: number) => n.toLocaleString("ja-JP");
 
 const transporter = nodemailer.createTransport({
@@ -33,6 +31,8 @@ interface OrderBody {
   counselingDay: string;
   counselingTime: string;
   notes: string;
+  couponCode: string;
+  discount: number;
 }
 
 export async function POST(req: Request) {
@@ -46,6 +46,11 @@ export async function POST(req: Request) {
     const fullName = `${body.lastName} ${body.firstName}`;
     const fullNameKana = `${body.lastNameKana} ${body.firstNameKana}`;
     const fullAddress = `〒${body.zipCode} ${body.prefecture}${body.city}${body.address}${body.building ? " " + body.building : ""}`;
+
+    const discountAmount = body.discount || 0;
+    const PRICE_EX_TAX = BASE_PRICE_EX_TAX - discountAmount;
+    const TAX = Math.floor(PRICE_EX_TAX * 0.1);
+    const PRICE_IN_TAX = PRICE_EX_TAX + TAX;
 
     // 管理者への通知メール
     await transporter.sendMail({
@@ -63,6 +68,13 @@ export async function POST(req: Request) {
         `お名前: ${fullName}（${fullNameKana}）`,
         `メールアドレス: ${body.email}`,
         `電話番号: ${body.phone}`,
+        ``,
+        `【ご注文金額】`,
+        `本体価格: ¥${fmt(BASE_PRICE_EX_TAX)}`,
+        discountAmount > 0 ? `クーポン割引: -¥${fmt(discountAmount)}（コード: ${body.couponCode}）` : "",
+        discountAmount > 0 ? `割引後価格: ¥${fmt(PRICE_EX_TAX)}` : "",
+        `消費税: ¥${fmt(TAX)}`,
+        `合計（税込）: ¥${fmt(PRICE_IN_TAX)}`,
         ``,
         `【お届け先】`,
         fullAddress,
@@ -98,7 +110,9 @@ export async function POST(req: Request) {
         `━━━━━━━━━━━━━━━━━━━━━━━━`,
         ``,
         `【ご注文商品】`,
-        `Stem Filtra Activation　¥${fmt(PRICE_EX_TAX)}（税抜）`,
+        `Stem Filtra Activation　¥${fmt(BASE_PRICE_EX_TAX)}（税抜）`,
+        discountAmount > 0 ? `クーポン割引　-¥${fmt(discountAmount)}` : "",
+        discountAmount > 0 ? `割引後価格　¥${fmt(PRICE_EX_TAX)}（税抜）` : "",
         `消費税　¥${fmt(TAX)}`,
         `──────────────────`,
         `合計　¥${fmt(PRICE_IN_TAX)}（税込）`,
